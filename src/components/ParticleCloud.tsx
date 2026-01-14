@@ -45,7 +45,7 @@ const ParticleCloud: React.FC = () => {
 
             // 1. Decide how many dots we want based on screen size
             const density = 0.9;
-            const numParticles = Math.min(width * density, 800);
+            const numParticles = Math.min(width * density, 1100);
 
             // 2. Define a list of colors (shades of yellow and white)
             const palettes = [
@@ -58,14 +58,14 @@ const ParticleCloud: React.FC = () => {
 
             // 3. Spirograph math settings (Hypotrochoid formula)
             // Imagine a small circle rolling inside a big circle
-            const R = Math.min(width, height) * 0.45; // Radius of big circle (Outer size)
-            const r = R * 0.52;                        // Radius of small circle (Inner size)
+            const R = Math.min(width, height); // Radius of big circle (Outer size)
+            const r = R * 0.7;                        // Radius of small circle (Inner size)
             const d = R * 0.6;                         // Distance of the "pen" from center of small circle
 
             for (let i = 0; i < numParticles; i++) {
                 // 't' is the "angle" or "time" along the curve
                 // We do about 12 full rotations (PI * 2 * 12)
-                const t = (i / numParticles) * Math.PI * 2 * 12;
+                const t = (i / numParticles) * Math.PI * 2 * 36;
 
                 // Add a bit of 'jitter' so the dots aren't in a perfect mathematical line
                 const jitter = (Math.random() - 0.5) * 40;
@@ -87,7 +87,7 @@ const ParticleCloud: React.FC = () => {
                     originalX: x,
                     originalY: y,
                     color: randomBase,
-                    interactRadius: 80 + Math.random() * 100 // Varied radius for each particle
+                    interactRadius: 30 + Math.random() * 100 // Varied radius for each particle
                 });
             }
         };
@@ -101,7 +101,7 @@ const ParticleCloud: React.FC = () => {
             ctx.save();
             const glow = ctx.createRadialGradient(
                 mouseRef.current.x, mouseRef.current.y, 0,
-                mouseRef.current.x, mouseRef.current.y, 150
+                mouseRef.current.x, mouseRef.current.y, 75
             );
             glow.addColorStop(0, 'rgba(249, 219, 109, 0.15)');
             glow.addColorStop(1, 'rgba(249, 219, 109, 0)');

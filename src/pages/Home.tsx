@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ParticleCloud from '../components/ParticleCloud';
 import AnimatedBlock from '../components/AnimatedBlock';
 import { portfolioData } from '../data/content';
+import profilePic from '../assets/profile.png';
 import '../styles/animations.css';
 
 const Home: React.FC = () => {
@@ -28,6 +29,7 @@ const Home: React.FC = () => {
                     fontSize: '5rem',
                     marginBottom: '1rem',
                     fontWeight: 700,
+                    paddingBottom: '0.1em', // Prevent 'g' from being clipped
                     background: 'linear-gradient(to right, var(--accent-color), #fff)', // Gradient text
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent'
@@ -39,7 +41,7 @@ const Home: React.FC = () => {
                     color: 'var(--secondary-text)',
                     maxWidth: '600px'
                 }}>
-                    Integrated Biomedical Engineering & Health Sciences Student
+                    ⚙️ Integrated Biomedical Engineering & Health Sciences I Student @ McMaster 🧪
                 </p>
 
                 {/* Scroll Indicator */}
@@ -81,25 +83,28 @@ const Home: React.FC = () => {
                             <div style={{
                                 width: '200px',
                                 height: '200px',
-                                borderRadius: '24px', // Square with rounded corners
-                                background: 'linear-gradient(45deg, #333, #555)',
+                                borderRadius: '24px',
+                                overflow: 'hidden', // Ensure image respects border radius
                                 flexShrink: 0,
-                                border: '4px solid var(--accent-color)', // Yellow accented border
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                color: '#aaa',
-                                fontSize: '0.8rem',
-                                boxShadow: '0 0 30px rgba(252, 225, 129, 0.2)' // Yellow glow
+                                border: '4px solid var(--accent-color)',
+                                boxShadow: '0 0 30px rgba(252, 225, 129, 0.2)'
                             }}>
-                                [Profile Pic]
+                                <img
+                                    src={profilePic}
+                                    alt="David Wang"
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover'
+                                    }}
+                                />
                             </div>
                         </div>
                     </AnimatedBlock>
                 </section>
 
                 {/* Projects Grid */}
-                <section>
+                <section id="projects">
                     <AnimatedBlock>
                         <h3 style={{
                             fontSize: '2rem',
