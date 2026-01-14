@@ -87,7 +87,7 @@ export const portfolioData = {
     {
       id: "dp2",
       path: "/projects/hip-implant",
-      title: "Design Project 2: Designing a Hip Implant",
+      title: "Designing a Hip Implant",
       icon: "🦴",
       overview: "Focused on designing a custom hip implant for a specific patient case involving metal allergy and arthritis.",
       skills: [
