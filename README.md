@@ -2,10 +2,6 @@
 
 This is a portfolio website for myself, created using React and TypeScript.
 
-## See the link
+## Link
 
-*not done yet lmao*
-
-```shell
-$ vercel
-```
+https://project-portfolio-five-ruddy.vercel.app

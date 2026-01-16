@@ -13,7 +13,12 @@ interface Point {
     interactRadius: number; // Unique interaction radius for this particle
 }
 
-const ParticleCloud: React.FC = () => {
+interface ParticleCloudProps {
+    accentColor: string;
+    isDarkMode: boolean;
+}
+
+const ParticleCloud: React.FC<ParticleCloudProps> = ({ accentColor, isDarkMode }) => {
     // These 'refs' allow us to access the HTML Canvas and track the mouse
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const mouseRef = useRef({ x: 0, y: 0 });
@@ -47,13 +52,32 @@ const ParticleCloud: React.FC = () => {
             const density = 0.9;
             const numParticles = Math.min(width * density, 1100);
 
-            // 2. Define a list of colors (shades of yellow and white)
-            const palettes = [
-                'rgba(249, 219, 109, ', // Main Accent (Yellow)
-                'rgba(255, 245, 200, ', // Pale Yellow
-                'rgba(255, 200, 100, ', // Warm Orange-ish
-                'rgba(255, 255, 255, ', // Pure White
-                'rgba(220, 220, 220, ', // Light Grey
+            // 2. Define a list of colors based on accent color
+            // Helper function to convert hex to RGB
+            const hexToRgb = (hex: string) => {
+                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return result ? {
+                    r: parseInt(result[1], 16),
+                    g: parseInt(result[2], 16),
+                    b: parseInt(result[3], 16)
+                } : { r: 249, g: 219, b: 109 }; // fallback to yellow
+            };
+
+            const rgb = hexToRgb(accentColor);
+
+            // Particle colors change based on theme
+            const palettes = isDarkMode ? [
+                `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, `, // Main Accent
+                `rgba(${Math.min(255, rgb.r + 30)}, ${Math.min(255, rgb.g + 30)}, ${Math.min(255, rgb.b + 30)}, `, // Lighter tint
+                `rgba(${Math.max(0, rgb.r - 30)}, ${Math.max(0, rgb.g - 30)}, ${Math.max(0, rgb.b - 30)}, `, // Darker shade
+                'rgba(255, 255, 255, ', // Pure White (dark mode)
+                'rgba(220, 220, 220, ', // Light Grey (dark mode)
+            ] : [
+                `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, `, // Main Accent
+                `rgba(${Math.max(0, rgb.r - 40)}, ${Math.max(0, rgb.g - 40)}, ${Math.max(0, rgb.b - 40)}, `, // Darker accent shade
+                'rgba(0, 0, 0, ', // Pure black for high contrast
+                'rgba(40, 40, 40, ', // Very dark grey
+                'rgba(80, 80, 80, ', // Medium grey
             ];
 
             // 3. Spirograph math settings (Hypotrochoid formula)
@@ -92,6 +116,16 @@ const ParticleCloud: React.FC = () => {
             }
         };
 
+        // Helper function to convert hex to RGB (used in both initParticles and animate)
+        const hexToRgb = (hex: string) => {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : { r: 249, g: 219, b: 109 }; // fallback to yellow
+        };
+
         // This is the animation loop that runs ~60 times per second
         const animate = () => {
             // Clear the screen before drawing the next frame
@@ -99,12 +133,13 @@ const ParticleCloud: React.FC = () => {
 
             // 0. DRAW MOUSE GLOW (Spotlight effect)
             ctx.save();
+            const rgb = hexToRgb(accentColor);
             const glow = ctx.createRadialGradient(
                 mouseRef.current.x, mouseRef.current.y, 0,
                 mouseRef.current.x, mouseRef.current.y, 75
             );
-            glow.addColorStop(0, 'rgba(249, 219, 109, 0.15)');
-            glow.addColorStop(1, 'rgba(249, 219, 109, 0)');
+            glow.addColorStop(0, `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.15)`);
+            glow.addColorStop(1, `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0)`);
             ctx.fillStyle = glow;
             ctx.fillRect(0, 0, width, height);
             ctx.restore();
@@ -172,7 +207,7 @@ const ParticleCloud: React.FC = () => {
             window.removeEventListener('mousemove', handleMouseMove);
             cancelAnimationFrame(animationFrameId);
         };
-    }, []);
+    }, [accentColor, isDarkMode]); // Re-initialize particles when accent color or theme changes
 
     return (
         <canvas
@@ -183,7 +218,9 @@ const ParticleCloud: React.FC = () => {
                 left: 0,
                 zIndex: 0, // Stay in the background
                 pointerEvents: 'none', // Allow clicking through the dots to buttons below
-                background: 'radial-gradient(circle at center, #1a1a1a 0%, #0c0c0c 100%)'
+                background: isDarkMode
+                    ? 'radial-gradient(circle at center, #1a1a1a 0%, #0c0c0c 100%)'
+                    : 'radial-gradient(circle at center, #ffffff 0%, #f0f0f0 100%)'
             }}
         />
     );
