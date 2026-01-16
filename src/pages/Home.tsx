@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ParticleCloud from '../components/ParticleCloud';
 import AnimatedBlock from '../components/AnimatedBlock';
@@ -9,9 +9,39 @@ import '../styles/animations.css';
 const Home: React.FC = () => {
     const { home } = portfolioData;
 
+    // Track accent color from CSS variable
+    const [accentColor, setAccentColor] = useState('#f9db6d');
+    const [isDarkMode, setIsDarkMode] = useState(true);
+
+    useEffect(() => {
+        // Update accent color when CSS variable changes
+        const updateAccentColor = () => {
+            const color = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
+            if (color) setAccentColor(color);
+        };
+
+        // Update dark mode when CSS variable changes
+        const updateDarkMode = () => {
+            const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim();
+            setIsDarkMode(bgColor === '#0c0c0c' || bgColor === 'rgb(12, 12, 12)');
+        };
+
+        // Initial update
+        updateAccentColor();
+        updateDarkMode();
+
+        // Watch for changes (poll every 100ms)
+        const interval = setInterval(() => {
+            updateAccentColor();
+            updateDarkMode();
+        }, 100);
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <div style={{ position: 'relative', minHeight: '100vh' }}>
-            <ParticleCloud />
+            <ParticleCloud accentColor={accentColor} isDarkMode={isDarkMode} />
 
             {/* Hero Section */}
             <div style={{
@@ -30,9 +60,13 @@ const Home: React.FC = () => {
                     marginBottom: '1rem',
                     fontWeight: 700,
                     paddingBottom: '0.1em', // Prevent 'g' from being clipped
-                    background: 'linear-gradient(to right, var(--accent-color), #fff)', // Gradient text
+                    background: isDarkMode
+                        ? `linear-gradient(to right, ${accentColor}, #fff)`
+                        : `linear-gradient(to right, ${accentColor}, #000)`, // Gradient ends in black for light mode
                     WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
+                    backgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    color: 'transparent'
                 }}>
                     David Wang
                 </h1>

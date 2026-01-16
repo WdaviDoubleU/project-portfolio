@@ -15,7 +15,7 @@ const SectionRenderer: React.FC<{ section: Section }> = ({ section }) => {
 
             <AnimatedBlock delay="delay-1">
                 {section.content.map((p, i) => (
-                    <p key={i} style={{ marginBottom: '1rem', color: '#ccc' }}>{p}</p>
+                    <p key={i} style={{ marginBottom: '1rem', color: 'var(--text-color)' }}>{p}</p>
                 ))}
             </AnimatedBlock>
 
