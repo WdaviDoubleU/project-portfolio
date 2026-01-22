@@ -60,14 +60,17 @@ const Home: React.FC = () => {
                     marginBottom: '1rem',
                     fontWeight: 700,
                     paddingBottom: '0.1em', // Prevent 'g' from being clipped
-                    background: isDarkMode
+                    display: 'inline-block', // Required for gradient text to work properly
+                    backgroundImage: isDarkMode
                         ? `linear-gradient(to right, ${accentColor}, #fff)`
-                        : `linear-gradient(to right, ${accentColor}, #000)`, // Gradient ends in black for light mode
-                    WebkitBackgroundClip: 'text',
+                        : `linear-gradient(to right, ${accentColor}, #1a1a1a)`, // Gradient ends in dark grey for light mode
+                    backgroundSize: '100%',
+                    backgroundRepeat: 'no-repeat',
                     backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     color: 'transparent'
-                }}>
+                } as React.CSSProperties}>
                     David Wang
                 </h1>
                 <p className="fade-in delay-1" style={{
