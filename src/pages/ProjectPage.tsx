@@ -84,7 +84,7 @@ const ProjectPage: React.FC = () => {
     }
 
     return (
-        <div className="container" style={{ paddingTop: '2rem', paddingBottom: '4rem', maxWidth: '900px' }}>
+        <div className="container" style={{ paddingTop: '8rem', paddingBottom: '4rem', maxWidth: '900px' }}>
 
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '4rem' }}>

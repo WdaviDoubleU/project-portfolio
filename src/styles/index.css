@@ -23,6 +23,14 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 6rem;
+}
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);

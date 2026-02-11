@@ -84,8 +84,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         padding: '0.8rem 1.5rem',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
-        opacity: (scrolled && !mouseNearTop) ? 0 : 1,
-        pointerEvents: (scrolled && !mouseNearTop) ? 'none' as const : 'auto' as const
+        opacity: (scrolled && !mouseNearTop && !menuOpen) ? 0 : 1,
+        pointerEvents: (scrolled && !mouseNearTop && !menuOpen) ? 'none' as const : 'auto' as const
     };
 
     return (
