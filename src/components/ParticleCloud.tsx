@@ -144,6 +144,11 @@ const ParticleCloud: React.FC<ParticleCloudProps> = ({ accentColor, isDarkMode }
             ctx.fillRect(0, 0, width, height);
             ctx.restore();
 
+            // GLOBAL PULSE FACTOR
+            // Oscillates between 0.8 and 1.2 over time
+            const time = Date.now() * 0.002;
+            const pulse = 1 + Math.sin(time) * 0.2;
+
             particles.forEach(p => {
                 // 1. MOUSE INTERACTION
                 const dx = mouseRef.current.x - p.x;
@@ -176,7 +181,8 @@ const ParticleCloud: React.FC<ParticleCloudProps> = ({ accentColor, isDarkMode }
 
                 // 4. DRAWING
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                // Apply pulse to size
+                ctx.arc(p.x, p.y, p.size * pulse, 0, Math.PI * 2);
 
                 // Make dots far from the mouse slightly stealthier
                 const opacity = Math.max(0.2, 0.4 + (1 - dist / 500) * 0.5);

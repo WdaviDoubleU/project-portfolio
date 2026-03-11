@@ -172,8 +172,9 @@ const Home: React.FC = () => {
                                         transition: 'transform 0.3s ease, border-color 0.3s ease',
                                         cursor: 'pointer',
                                         display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '1rem'
+                                        flexDirection: 'column',
+                                        alignItems: 'stretch',
+                                        gap: '1.5rem'
                                     }}
                                     onMouseEnter={(e) => {
                                         e.currentTarget.style.transform = 'translateY(-5px)';
@@ -184,8 +185,29 @@ const Home: React.FC = () => {
                                         e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
                                     }}
                                 >
-                                    <div style={{ fontSize: '2rem' }}>{project.icon}</div>
-                                    <h4 style={{ fontSize: '1.2rem', color: 'var(--text-color)' }}>{project.title}</h4>
+                                    {/* Image Placeholder */}
+                                    <div style={{
+                                        width: '100%',
+                                        height: '200px',
+                                        background: 'rgba(0,0,0,0.2)',
+                                        border: '1px dashed var(--secondary-text)',
+                                        borderRadius: '8px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        fontSize: '3rem',
+                                        transition: 'border-color 0.3s ease'
+                                    }}>
+                                        {project.icon}
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                        <h4 style={{ fontSize: '1.4rem', color: 'var(--text-color)', margin: 0 }}>{project.title}</h4>
+                                        {(project as any).description && (
+                                            <p style={{ fontSize: '1rem', color: 'var(--secondary-text)', margin: 0, lineHeight: 1.5 }}>
+                                                {(project as any).description}
+                                            </p>
+                                        )}
+                                    </div>
                                 </Link>
                             ))}
                         </div>

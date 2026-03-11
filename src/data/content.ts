@@ -4,6 +4,7 @@ export interface Project {
   icon: string;
   path: string;
   overview: string;
+  description?: string; // Add description property
   skills: { title: string; desc: string }[];
   sections: Section[];
 }
@@ -29,13 +30,22 @@ export const portfolioData = {
         id: "dp1",
         title: "Modifying an Ostomy Appliance",
         icon: "⭕",
-        path: "/projects/ostomy-appliance"
+        path: "/projects/ostomy-appliance",
+        description: "Improving seal integrity and usability of ostomy bags."
       },
       {
         id: "dp2",
         title: "Designing a Hip Implant",
         icon: "🦴",
-        path: "/projects/hip-implant"
+        path: "/projects/hip-implant",
+        description: "Custom hip implant design for a specific patient profile."
+      },
+      {
+        id: "dp3",
+        title: "Automatic Pill Bottle Opener",
+        icon: "💊",
+        path: "/projects/pill-bottle-opener",
+        description: "Automated pill extraction device with smart sealing."
       }
     ]
   },
@@ -47,8 +57,13 @@ export const portfolioData = {
       icon: "⭕",
       overview: "A modification of existing medical appliances to improve the patient experience, focusing on seal integrity and ease of use.",
       skills: [
-        { title: "Autodesk Inventor", desc: "Creating 3D models for parts." },
-        { title: "Collaboration", desc: "Managing timelines and interpersonal communication." }
+        { title: "Autodesk Inventor and CAD", desc: "" },
+        { title: "Collaboration/Interpersonal skills", desc: "" },
+        { title: "3D Printing", desc: "" },
+        { title: "Communication: Oral and Written", desc: "" },
+        { title: "Time Management: Making and using a GANTT Chart", desc: "" },
+        { title: "Technical research", desc: "" },
+        { title: "Pitching and Presentation skills", desc: "" }
       ],
       sections: [
         {
@@ -115,6 +130,50 @@ export const portfolioData = {
             "Presentation: Improvement in public speaking and answering technical questions."
           ],
           imagePlaceholder: "Exploded view diagram of the hip implant assembly"
+        }
+      ]
+    },
+    {
+      id: "dp3",
+      path: "/projects/pill-bottle-opener",
+      title: "Automatic Pill Bottle Opener",
+      icon: "💊",
+      overview: "An automated pill dispensing device for people with fine motor challenges.",
+      skills: [
+        { title: "Autodesk Inventor", desc: "Creating 3D models for parts." },
+        { title: "Collaboration", desc: "Managing timelines and interpersonal communication." }
+      ],
+      sections: [
+        {
+          title: "Design Process",
+          content: [
+            "We identified patient concerns regarding seal integrity and motor skill limitations (e.g., arthritis).",
+            "Our objectives were to create a device that is comfortable, easy to operate, lightweight, and durable."
+          ],
+          subSections: [
+            {
+              title: "Constraints",
+              content: ["Materials must be medical-grade and cost-effective."],
+              listItems: ["Must be waterproof", "Must be easy to clean"]
+            },
+            {
+              title: "My Initial Ideas",
+              content: ["Visual indicators (colors/tabs) and physical reinforcement (magnets/adhesives)."],
+              imagePlaceholder: "Sketches and handwritten notes of initial concepts"
+            },
+            {
+              title: "Prototypes",
+              content: ["The 'First Major Prototype' involved a clip ring and plastic flaps to secure the bag."],
+              imagePlaceholder: "CAD model screenshot of the clip ring"
+            }
+          ]
+        },
+        {
+          title: "Conclusion + Reflection",
+          content: [
+            "My overall contributions included brainstorming, ideation, and CAD modeling.",
+            "Future steps would involve testing with actual patients and refining the materials."
+          ]
         }
       ]
     }
