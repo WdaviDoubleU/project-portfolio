@@ -4,6 +4,14 @@ import dp1CadClipRing from '../assets/dp1_cad_clip_ring.png';
 import dp1CadTwistRing from '../assets/dp1_cad_twist_ring.png';
 import dp1Poster from '../assets/dp1_poster.png';
 import dp1FinalPrototype from '../assets/dp1_final_prototype.png';
+import dp2PrintedPrototypes from '../assets/dp2_printed_prototypes.png';
+import dp2PosterDisplay from '../assets/dp2_poster_display.png';
+import dp2ScrewSketches from '../assets/dp2_screw_sketches.png';
+import dp2InitialIdeas from '../assets/dp2_initial_ideas.png';
+import dp2CadIterations from '../assets/dp2_cad_iteration_all.png';
+import dp2FinalCad from '../assets/dp2_final_cad.png';
+import dp2ExplodedAssembly from '../assets/dp2_exploded_assembly.png';
+import dp2TeamSymposium from '../assets/dp2_team_symposium.png';
 
 /** Placeholder graphics until project-specific assets exist */
 function placeholderImage(width: number, height: number, label: string): string {
@@ -25,6 +33,8 @@ export interface CalloutCard {
     src: string;
     alt: string;
     position?: 'right' | 'bottom';
+    /** 'contain' avoids cropping portrait / labeled photos */
+    fit?: 'contain' | 'cover';
   };
 }
 
@@ -331,6 +341,15 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
           title: "Overview",
           cards: [
             {
+              type: 'image',
+              width: 'full',
+              image: {
+                src: dp2PrintedPrototypes,
+                alt: "3D-printed hip implant models: fully assembled at 75% scale (pink) and femoral stem at 100% scale (white)",
+                fit: 'contain'
+              }
+            },
+            {
               type: 'text',
               title: "Skills / Tech learned",
               icon: "🛠️",
@@ -383,8 +402,9 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               type: 'image',
               width: 'third',
               image: {
-                src: placeholderImage(400, 320, '3D printed hip implant prototypes'),
-                alt: "Final 3D Printed Hip Implant prototypes (75% and 100% scale)"
+                src: dp2PosterDisplay,
+                alt: "Smooth Operator poster with 3D-printed hip implant prototypes on the table",
+                fit: 'contain'
               }
             }
           ]
@@ -413,9 +433,10 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "<strong>Liners:</strong> place liners on the head and socket without removing bone"
               ],
               image: {
-                src: placeholderImage(520, 360, 'Initial hip implant sketches'),
-                alt: "Initial sketches of full replacement screw design and joint liners",
-                position: 'right'
+                src: dp2ScrewSketches,
+                alt: "Initial notebook sketches of full joint replacement with screw fixation and liner concepts",
+                position: 'right',
+                fit: 'contain'
               }
             },
             {
@@ -431,9 +452,10 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "the joint lining idea would wear and not fix bone complications<ul style='margin-top:0.2rem; margin-bottom:0'><li>(also not allowed in project constraints)</li></ul>"
               ],
               image: {
-                src: placeholderImage(520, 360, 'Hip implant brainstorm'),
-                alt: "Whiteboard brainstorm of hip implant ideas including materials and mechanical concepts",
-                position: 'right'
+                src: dp2InitialIdeas,
+                alt: "Whiteboard brainstorm: hip implant ideas, materials, Team 28 notes, and total hip replacement diagram",
+                position: 'right',
+                fit: 'contain'
               }
             },
             {
@@ -450,9 +472,10 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "2. My second prototype had a a straighter stem that now <strong>fit</strong> the patient’s <strong>femur</strong>. But it still may not handle the <strong>stresses</strong> well, we eventually decided the curve would be so small it shouldn’t be needed."
               ],
               image: {
-                src: placeholderImage(520, 360, 'CAD femoral stem iterations'),
-                alt: "CAD iterations of the femoral stem showing progression from curved to straight geometry and refined details",
-                position: 'right'
+                src: dp2CadIterations,
+                alt: "Early CAD concept for femoral stem and head showing pronounced curvature before geometry refinement",
+                position: 'right',
+                fit: 'contain'
               }
             },
             {
@@ -468,9 +491,10 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "Four pegs on the acetabular cup grip into the pelvis for a secure hold."
               ],
               image: {
-                src: placeholderImage(520, 360, 'Final hip implant CAD'),
-                alt: "Final CAD render of hip stem assembly",
-                position: 'right'
+                src: dp2FinalCad,
+                alt: "CAD render of femoral stem with head: final implant geometry before printing",
+                position: 'right',
+                fit: 'contain'
               }
             },
             {
@@ -486,11 +510,33 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "Novel <strong>non-metallic</strong> material: PEEK plastic that has similar properties in strength as metal",
                 "PEEK is completely metal free, so the <strong>leeching</strong> is no longer an issue",
                 "<strong>Texture</strong> of slots and slight screw ridges to promote <strong>osteointegration</strong>"
-              ],
+              ]
+            },
+            {
+              type: 'image',
+              width: 'full',
               image: {
-                src: placeholderImage(600, 300, 'Poster Presentation'),
-                alt: "Poster",
-                position: 'bottom'
+                src: dp2ExplodedAssembly,
+                alt: "Figure 3: exploded view of Nyota's hip implant — acetabular cup, liner, femoral head, and femoral stem",
+                fit: 'contain'
+              }
+            },
+            {
+              type: 'image',
+              width: 'half',
+              image: {
+                src: dp2PosterDisplay,
+                alt: "Smooth Operator tri-fold poster with figures, X-rays, and implant justification",
+                fit: 'contain'
+              }
+            },
+            {
+              type: 'image',
+              width: 'half',
+              image: {
+                src: dp2TeamSymposium,
+                alt: "Design team with display board and printed hip implant prototypes at the showcase",
+                fit: 'contain'
               }
             }
           ]
