@@ -233,9 +233,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         Home
                     </Link>
 
-                    <div style={{ position: 'relative' }} data-projects-container>
-                        <button
-                            onClick={() => setProjectsMenuOpen(!projectsMenuOpen)}
+                    <div 
+                        style={{ position: 'relative' }} 
+                        data-projects-container
+                        onMouseEnter={() => setProjectsMenuOpen(true)}
+                        onMouseLeave={() => setProjectsMenuOpen(false)}
+                    >
+                        <a
+                            href="/#projects"
                             style={{
                                 background: 'none',
                                 border: 'none',
@@ -247,11 +252,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                 color: '#fff',
                                 display: 'flex',
                                 alignItems: 'center',
-                                gap: '0.5rem'
+                                gap: '0.5rem',
+                                textDecoration: 'none'
                             }}
                         >
                             Projects {projectsMenuOpen ? '▲' : '▼'}
-                        </button>
+                        </a>
 
                         {/* Projects Dropdown Menu */}
                         {projectsMenuOpen && (

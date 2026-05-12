@@ -1,9 +1,5 @@
-import dp1Header from '../assets/dp1_header_1778554024032.png';
-import dp2Header from '../assets/dp2_header_1778553822812.png';
 import dp2Implant from '../assets/dp2_implant_1778553836616.png';
 import dp2Cad from '../assets/dp2_cad_1778553981932.png';
-import dp3Header from '../assets/dp3_header_1778553994693.png';
-import dp4Header from '../assets/dp4_header_1778554131208.png';
 
 export type CalloutColor = 'green' | 'brown' | 'blue' | 'purple' | 'red';
 
@@ -89,7 +85,6 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
       path: "/projects/ostomy-appliance",
       title: "Design Project 1: Modifying an Ostomy Appliance",
       icon: "⭕",
-      headerImage: dp1Header,
       sections: [
         {
           title: "Overview",
@@ -113,25 +108,22 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
             },
             {
               type: 'text',
-              title: "Background Info, if needed:",
-              icon: "🧠",
-              color: "brown",
-              width: "half",
-              listItems: [
-                "<strong>Ostomy:</strong> Surgery that creates opening in abdomen, waste is rerouted out the body.",
-                "<strong>Ostomy appliance:</strong> removable pouch that collects waste"
-              ]
-            },
-            {
-              type: 'text',
               title: "Patient Summary:",
               icon: "👤",
-              color: "brown",
+              color: "red",
               width: "half",
               listItems: [
                 "<strong>Concerns of seal integrity:</strong> Constantly removing and resealing the appliance because of fear it is improperly attached and would leak. This eventually wears down the seal before it is time to replace.",
                 "<strong>Arthritis:</strong> Hard to generate force and operate small mechanisms with fine motor skills"
               ]
+            },
+            {
+              type: 'image',
+              width: 'half',
+              image: {
+                src: "https://via.placeholder.com/600x400/222/aaa?text=Ostomy+Appliance",
+                alt: "Ostomy Appliance Image"
+              }
             }
           ]
         },
@@ -140,12 +132,11 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
           cards: [
             {
               type: 'text',
-              title: "Design Process",
-              icon: "📈",
+              title: "Identifying Goals: the problem to solve",
+              icon: "🎯",
               color: "blue",
-              width: "full",
+              width: "half",
               content: [
-                "<strong>Identifying Goals: the problem to solve</strong>",
                 "<strong>Objectives:</strong>"
               ],
               listItems: [
@@ -158,7 +149,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
             {
               type: 'text',
               title: "Constraints:",
-              color: "brown",
+              color: "blue",
               icon: "🛑",
               width: "half",
               listItems: [
@@ -173,47 +164,34 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               type: 'text',
               title: "My Initial Ideas:",
               icon: "💡",
-              color: "blue",
+              color: "brown",
               width: "full",
               listItems: [
-                "<strong>Visual</strong> indicators of lock",
-                "contrasting colors between connection pieces",
-                "plastic pop up tabs to indicate lock",
-                "<strong>Physical</strong> reinforcement",
-                "twist or rigid ring hinge lock",
-                "elastic or tape seal",
-                "magnetic seal"
-              ]
-            },
-            {
-              type: 'text',
-              title: "Reviewing my ideas in hindsight:",
-              color: "purple",
-              icon: "🤔",
-              width: "full",
-              listItems: [
-                "many were too outlandish and would require a large <strong>redesign</strong>, such as the air pressure idea",
-                "Some would be hard to manufacture to too <strong>expensive</strong>, such as the magnets or plastic tabs",
-                "Some may not provide <strong>complete security</strong>, such as the various <strong>indicators</strong>"
-              ]
+                "<strong>Visual indicators of lock</strong><ul style='margin-top:0.2rem; margin-bottom:0'><li>contrasting colors between connection pieces</li><li>plastic pop up tabs to indicate lock</li></ul>",
+                "<strong>Physical reinforcement</strong><ul style='margin-top:0.2rem; margin-bottom:0'><li>twist or rigid ring hinge lock</li><li>elastic or tape seal</li><li>magnetic seal</li></ul>"
+              ],
+              image: {
+                src: "https://via.placeholder.com/400x300/222/aaa?text=Hand+Sketches",
+                alt: "Sketches",
+                position: 'right'
+              }
             },
             {
               type: 'text',
               title: "Brainstorm and discussion with group:",
               icon: "💬",
-              color: "blue",
+              color: "purple",
               width: "full",
               listItems: [
                 "We realized we should <strong>combine</strong> ideas",
                 "This would only provide more assurance",
-                "We narrowed down to a few major ideas:",
-                "An <strong>outer ring</strong> around the inside one",
-                "A clip style connection",
-                "A twist cap style connection",
-                "A <strong>visual indicator</strong> of lock integrity",
-                "plastic tabs to pop up when secure",
-                "pH indicator around the connection ring"
-              ]
+                "We narrowed down to a few major ideas:<ul style='margin-top:0.2rem; margin-bottom:0'><li>An <strong>outer ring</strong> around the inside one</li><li>A clip style connection</li><li>A twist cap style connection</li><li>A <strong>visual indicator</strong> of lock integrity<ul style='margin-top:0.2rem; margin-bottom:0'><li>plastic tabs to pop up when secure</li><li>pH indicator around the connection ring</li></ul></li></ul>"
+              ],
+              image: {
+                src: "https://via.placeholder.com/400x300/222/aaa?text=Whiteboard",
+                alt: "Whiteboard",
+                position: 'right'
+              }
             },
             {
               type: 'text',
@@ -221,19 +199,22 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               icon: "🛠️",
               color: "blue",
               width: "full",
-              content: [
-                "We decided to do the clip ring and plastic flaps. I created the cad model for the clip ring prototype. I tried to contribute to the design of the pop-up caps."
-              ],
               listItems: [
+                "We decided to do the clip ring and plastic flaps. I created the cad model for the clip ring prototype. I tried to contribute to the design of the pop-up caps.",
                 "ultimately we did not end up making a feasible prototype for this"
-              ]
+              ],
+              image: {
+                src: "https://via.placeholder.com/400x200/222/aaa?text=CAD+Rings",
+                alt: "CAD Rings",
+                position: 'right'
+              }
             },
             {
               type: 'text',
               title: "Review thoughts:",
               color: "brown",
               icon: "📉",
-              width: "half",
+              width: "full",
               listItems: [
                 "the clip ring was too <strong>weak</strong> and would likely <strong>wear</strong> out easily",
                 "The plastics tabs were hard to make, and would also wear out very quickly"
@@ -245,9 +226,14 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               color: "blue",
               icon: "➡️",
               width: "full",
-              content: [
+              listItems: [
                 "We decided to switch to a <strong>twist ring</strong>, like a bottle cap. I <strong>began to make</strong> the CAD model, modifying my original design and learning how to use coil. We also decided the <strong>pH strip</strong> circle as a better indicator."
-              ]
+              ],
+              image: {
+                src: "https://via.placeholder.com/400x200/222/aaa?text=Toothed+Rings",
+                alt: "Toothed Rings",
+                position: 'right'
+              }
             },
             {
               type: 'text',
@@ -262,7 +248,12 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "Twist ring around original connection to physically reinforce seal",
                 "Rubber seal in ring",
                 "pH paper ring to show leakage, quick check for leakage, providing mental reassurance, easily replaceable as a sticker"
-              ]
+              ],
+              image: {
+                src: "https://via.placeholder.com/400x300/222/aaa?text=Twist+N+Tell+Poster",
+                alt: "Poster",
+                position: 'right'
+              }
             }
           ]
         },
@@ -271,13 +262,10 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
           cards: [
             {
               type: 'text',
-              title: "Conclusion + Reflection",
+              title: "My Overall Contributions:",
               icon: "🌟",
               color: "green",
               width: "full",
-              content: [
-                "<strong>My Overall Contributions:</strong>"
-              ],
               listItems: [
                 "Brainstorming, ideation, design",
                 "Created the CAD models of ring protypes",
@@ -316,7 +304,6 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
       path: "/projects/hip-implant",
       title: "Design Project 2: Designing a Hip Implant",
       icon: "🦴",
-      headerImage: dp2Header,
       sections: [
         {
           title: "Overview",
@@ -343,8 +330,8 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               type: 'text',
               title: "Identifying Goals: the problem to solve",
               icon: "🎯",
-              color: "brown",
-              width: "two-thirds",
+              color: "red",
+              width: "third",
               content: [
                 "<strong>Objectives:</strong>"
               ],
@@ -356,6 +343,18 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "<strong>restore motion</strong> lost due to rheumatoid arthritis",
                 "<strong>reduce</strong> bone <strong>erosion</strong> on the pelvis",
                 "<strong>mimic</strong> a healthy hip joint"
+              ]
+            },
+            {
+              type: 'text',
+              title: "Patient Summary:",
+              icon: "👤",
+              color: "brown",
+              width: "third",
+              listItems: [
+                "<strong>56-year-old female:</strong> Rheumatoid Arthritis -> Needs Hip Replacement.",
+                "<strong>Complication:</strong> Highly allergic to almost all metals (titanium, cobalt-chromium, nickel, etc.).",
+                "<strong>Bone Erosion:</strong> Rheumatoid arthritis has eroded her bone, requiring an implant that preserves as much bone as possible."
               ]
             },
             {
@@ -373,29 +372,29 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
           cards: [
             {
               type: 'text',
-              title: "Constraints:",
-              icon: "🛑",
+              title: "Ideation / Brainstorming",
+              icon: "💡",
               color: "blue",
               width: "full",
-              listItems: [
-                "<strong>not</strong> contain any <strong>metallic</strong> products",
-                "adhere to health and safety <strong>standards</strong>",
-                "bear body <strong>weight</strong> and <strong>bodily functions</strong> of the patient",
-                "make an <strong>implant</strong> to help remove the impact of rheumatoid arthritis"
+              content: [
+                "<div style='display:grid; grid-template-columns: 1fr 1fr; gap: 2rem;'><div><strong>Objectives</strong><ul style='margin-top:0.5rem'><li>custom to patient's anatomy</li><li>reduce pain in hip and feet</li><li>reduce stiffness in the thigh and groin area</li><li>comfortable</li><li>restore motion lost due to rheumatoid arthritis</li><li>reduce bone erosion on the pelvis</li><li>mimic a healthy hip joint</li></ul></div><div><strong>Constraints</strong><ul style='margin-top:0.5rem'><li>not contain any metallic products</li><li>adhere to health and safety standards</li><li>bear body weight and bodily functions of the patient</li><li>make an implant to help remove the impact of rheumatoid arthritis</li></ul></div></div>"
               ]
             },
             {
               type: 'text',
               title: "My Initial Ideas:",
-              icon: "💡",
+              icon: "🧠",
               color: "brown",
               width: "full",
               listItems: [
-                "<strong>Full replacement screw design</strong>",
-                "<strong>Both</strong> socket and head and <strong>replaced</strong>",
-                "The acetabular cup and stem has a <strong>screw</strong> shape for hold",
+                "<strong>Full replacement screw design</strong><ul style='margin-top:0.2rem; margin-bottom:0'><li>Both socket and head and replaced</li><li>The acetabular cup and stem has a screw shape for hold</li></ul>",
                 "<strong>Liners:</strong> place liners on the head and socket without removing bone"
-              ]
+              ],
+              image: {
+                src: "https://via.placeholder.com/300x400/222/aaa?text=Bone+Sketches",
+                alt: "Sketches",
+                position: 'right'
+              }
             },
             {
               type: 'text',
@@ -407,20 +406,13 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "My sketches weren't great can could be improved",
                 "The screw acetabular cup would remove too much bone, a conventional design is better",
                 "The screw would make a harder surgical procedure",
-                "the joint lining idea would wear and not fix bone complications",
-                "(also not allowed in project constraints)"
-              ]
-            },
-            {
-              type: 'text',
-              title: "Brainstorm and discussion with group:",
-              icon: "💬",
-              color: "blue",
-              width: "full",
-              listItems: [
-                "We decided on another group members idea of a curved tapered stem for a firmer hold that minimizes bone loss",
-                "Discussed incorporating sensors, but decided it cost too much, and beyond feasibility"
-              ]
+                "the joint lining idea would wear and not fix bone complications<ul style='margin-top:0.2rem; margin-bottom:0'><li>(also not allowed in project constraints)</li></ul>"
+              ],
+              image: {
+                src: "https://via.placeholder.com/300x400/222/aaa?text=Lined+Notes",
+                alt: "Notes",
+                position: 'right'
+              }
             },
             {
               type: 'text',
@@ -434,6 +426,24 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               listItems: [
                 "1. My first prototype had a very <strong>pronounced</strong> curve. But it curved beyond patients bone <strong>measurements</strong> and research showed it may not handle the <strong>stresses</strong> well.",
                 "2. My second prototype had a a straighter stem that now <strong>fit</strong> the patient’s <strong>femur</strong>. But it still may not handle the <strong>stresses</strong> well, we eventually decided the curve would be so small it shouldn’t be needed."
+              ],
+              image: {
+                src: "https://via.placeholder.com/300x400/222/aaa?text=CAD+Renders",
+                alt: "CAD Renders",
+                position: 'right'
+              }
+            },
+            {
+              type: 'text',
+              title: "Final CAD Models and Assembly:",
+              icon: "💻",
+              color: "blue",
+              width: "full",
+              listItems: [
+                "The assembly has two main components: the acetabular cup (the socket) and the femoral stem (the ball and stem).",
+                "A polyethylene liner would act as the cartilage between the head and the socket, reducing friction.",
+                "The head of the stem is removable, allowing the doctor to attach the correct size head based on the patient's exact measurements.",
+                "Four pegs on the acetabular cup grip into the pelvis for a secure hold."
               ],
               image: {
                 src: dp2Cad,
@@ -454,7 +464,12 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "Novel <strong>non-metallic</strong> material: PEEK plastic that has similar properties in strength as metal",
                 "PEEK is completely metal free, so the <strong>leeching</strong> is no longer an issue",
                 "<strong>Texture</strong> of slots and slight screw ridges to promote <strong>osteointegration</strong>"
-              ]
+              ],
+              image: {
+                src: "https://via.placeholder.com/600x300/222/aaa?text=Poster+Presentation",
+                alt: "Poster",
+                position: 'bottom'
+              }
             }
           ]
         },
@@ -467,8 +482,12 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               icon: "🌟",
               color: "green",
               width: "full",
+              twoColumnList: true,
               listItems: [
-                "Poster board presentation, I <strong>improved</strong> from last time, gained experience in how to quickly inform someone of your ideas while holding their <strong>attention</strong> and answering scrutinizing <strong>questions</strong>."
+                "Created CAD model of the femoral stem",
+                "Created final assembly of CAD model",
+                "Created and 3D printed the acetabular cup and femoral stem (1/2 scale)",
+                "Contributed content to the final poster"
               ]
             },
             {
@@ -479,7 +498,9 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               width: "half",
               content: [
                 "<strong>Communication:</strong>",
-                "I communicated well with the team, replying to ideas, and they replied to mine. We were almost always on the same page."
+                "I communicated well with the team, replying to ideas, and they replied to mine. We were almost always on the same page.",
+                "<strong>Overall Team Dynamic:</strong>",
+                "We all had great team dynamic, and I made friends with people in the group that I still keep in contact with now. We shared similar work ethics and goals, which meant everyone put in effort."
               ]
             },
             {
@@ -489,8 +510,10 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               color: "purple",
               width: "half",
               content: [
-                "<strong>Consensus:</strong>",
-                "It was initial hard to agree on an idea the entire team wanted to move forward with, I could improve in the communication and decision making process in the group."
+                "<strong>Scope:</strong>",
+                "While deciding on our initial idea, we had trouble deciding between multiple good ideas to determine which one fit best into the time frame we had. We got a better idea of how complex of a project we were able to complete in a certain amount of time.",
+                "<strong>Material Properties:</strong>",
+                "Discovering that non-metallic implants are incredibly rare, we had to heavily research PEEK to ensure it met the standards."
               ]
             }
           ]
@@ -502,7 +525,6 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
       path: "/projects/pill-bottle-opener",
       title: "Design Project 3: Pill Bottle Opener",
       icon: "💊",
-      headerImage: dp3Header,
       sections: [
         {
           title: "Overview",
@@ -527,25 +549,24 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
             },
             {
               type: 'text',
-              title: "Background Info:",
-              icon: "🧠",
-              color: "brown",
+              title: "Identifying Goals:",
+              icon: "🎯",
+              color: "red",
               width: "half",
               listItems: [
-                "<strong>The child proof cap dilemma:</strong> Must prevent children from opening bottles, while somehow allowing seniors with limited hand dexterity to as well.",
-                "this is often an impossible task because senior hand dexterity can be <strong>similar</strong> to that of children"
+                "Should be <strong>conveniently fast</strong>",
+                "Should be <strong>easy</strong> to use <strong>without much dexterity</strong> required",
+                "Should require <strong>minimal</strong> manual effort from consumer"
               ]
             },
             {
               type: 'text',
-              title: "Our idea for a solution:",
-              icon: "💡",
+              title: "Patient Summary:",
+              icon: "👤",
               color: "brown",
               width: "half",
               listItems: [
-                "Create a machine that can <strong>automatically</strong> open bottles with very <strong>limited input</strong>",
-                "will <strong>push down, twist</strong> and <strong>lift</strong> the lid off a pill bottle",
-                "pills can then be taken out <strong>without struggle</strong> with lid"
+                "A senior patient needs a device to open child-proof medicine bottles. They have <strong>reduced grip strength</strong> and <strong>limited fine motor skills</strong>."
               ]
             }
           ]
@@ -558,7 +579,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               title: "Insights + Research:",
               icon: "📈",
               color: "blue",
-              width: "full",
+              width: "half",
               listItems: [
                 "Age related conditions like arthritis are associated with <strong>reduced grip strength</strong> and <strong>impaired fine motor control</strong>, making repetitive hand tasks more difficult",
                 "<strong>44%</strong> of <strong>over 81 year old’s</strong> were unable to open a screw cap bottle",
@@ -568,25 +589,10 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
             },
             {
               type: 'text',
-              title: "Identifying Goals: the problem to solve",
-              icon: "🎯",
-              color: "brown",
-              width: "full",
-              content: [
-                "<strong>Objectives:</strong>"
-              ],
-              listItems: [
-                "Should be <strong>conveniently fast</strong>",
-                "Should be <strong>easy</strong> to use <strong>without much dexterity</strong> required",
-                "Should require <strong>minimal</strong> manual effort from consumer"
-              ]
-            },
-            {
-              type: 'text',
               title: "Constraints:",
               icon: "🛑",
-              color: "purple",
-              width: "full",
+              color: "blue",
+              width: "half",
               listItems: [
                 "Must <strong>secure</strong> medicine bottle while in use",
                 "Must <strong>open</strong> bottle",
@@ -598,43 +604,71 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               type: 'text',
               title: "My Initial Ideas:",
               icon: "💡",
-              color: "blue",
+              color: "brown",
               width: "full",
               listItems: [
-                "<strong>Device:</strong>",
-                "an box style case",
-                "4 <strong>linear actuators</strong> in the poles to raise an lower the platform",
-                "A rotating base on the top platform that can rotate with a <strong>gear</strong> mechanism",
-                "On the base will be a cylinder containing a “<strong>gripper</strong>” mechanism to grasp a lid, this would be a <strong>rack and pinion</strong> mechanism",
-                "The rotating base would <strong>twist</strong> the lid after the platform lower <strong>squeezes</strong> it down",
-                "A “cup holder” to <strong>grip</strong> and fix the bottle in place",
-                "LEDs to signal status of the device: <strong>red, yellow and green</strong>",
-                "Force sensitive resistors (FSRs) to detect the <strong>presence</strong> of the cup, that the lid is sufficiently <strong>pressed</strong> and the lid is <strong>untwisted</strong>"
-              ]
-            },
-            {
-              type: 'text',
-              title: "Code:",
-              icon: "💻",
-              color: "blue",
-              width: "full",
-              listItems: [
-                "A giant while loop",
-                "takes in FSR outputs",
-                "calculates <strong>rolling average</strong> for each: for loop, 5 times, that appends to a list then finds average",
-                "<strong>conditions</strong> to check if each of the motors should be <strong>activated</strong>",
-                "Turn on <strong>LEDs</strong> to show <strong>status</strong>"
-              ]
+                "<strong>Device:</strong><ul style='margin-top:0.2rem; margin-bottom:0'><li>an box style case</li><li>4 <strong>linear actuators</strong> in the poles to raise an lower the platform</li><li>A rotating base on the top platform that can rotate with a <strong>gear</strong> mechanism</li><li>On the base will be a cylinder containing a “<strong>gripper</strong>” mechanism to grasp a lid, this would be a <strong>rack and pinion</strong> mechanism</li><li>The rotating base would <strong>twist</strong> the lid after the platform lower <strong>squeezes</strong> it down</li><li>A “cup holder” to <strong>grip</strong> and fix the bottle in place</li><li>LEDs to signal status of the device: <strong>red, yellow and green</strong></li><li>Force sensitive resistors (FSRs) to detect the <strong>presence</strong> of the cup, that the lid is sufficiently <strong>pressed</strong> and the lid is <strong>untwisted</strong></li></ul>",
+                "<strong>Code:</strong><ul style='margin-top:0.2rem; margin-bottom:0'><li>A giant while loop</li><li>takes in FSR outputs</li><li>calculates <strong>rolling average</strong> for each: for loop, 5 times, that appends to a list then finds average</li><li><strong>conditions</strong> to check if each of the motors should be <strong>activated</strong></li><li>Turn on <strong>LEDs</strong> to show <strong>status</strong></li></ul>"
+              ],
+              image: {
+                src: "https://via.placeholder.com/300x400/222/aaa?text=Initial+Prototype",
+                alt: "Initial Prototype",
+                position: 'right'
+              }
             },
             {
               type: 'text',
               title: "Final Result:",
+              icon: "🏁",
+              color: "purple",
+              width: "full",
+              listItems: [
+                "<strong>Result:</strong><ul style='margin-top:0.2rem; margin-bottom:0'><li>we were only able to complete the <strong>lifting and twisting</strong> mechanism as a <strong>lower fidelity</strong> prototype. It worked through <strong>sequential</strong> steps of the motors, we were able to open a pill bottle lid in our <strong>demonstration</strong>.</li></ul>",
+                "<strong>Our YouTube video:</strong>"
+              ],
+              image: {
+                src: "https://via.placeholder.com/400x300/222/aaa?text=CAD+Base",
+                alt: "CAD Base",
+                position: 'right'
+              }
+            },
+            {
+              type: 'text',
+              title: "Prototyping",
+              icon: "⚙️",
+              color: "blue",
+              width: "full",
+              content: [
+                "To fix these issues, we used a gear box and smaller motors, so that we could place them in the correct spots for proper alignment and required leverage."
+              ],
+              listItems: [
+                "<strong>1. Block Logic Diagram</strong><br/>Mapped inputs, states, and outputs.",
+                "<strong>2. Hardware details</strong><ul style='margin-top:0.2rem; margin-bottom:0'><li>Linear actuator (NEMA 14 stepper motor) moves the platform.</li><li>DC motor (with gearbox) turns the bottle lid.</li><li>FSR (Force Sensitive Resistor) detects if the pill bottle is present.</li></ul>",
+                "<strong>3. Code Logic diagram</strong><br/>Visualized the polling loop.",
+                "<strong>4. Materials needed</strong><ul style='margin-top:0.2rem; margin-bottom:0'><li>NEMA 14 stepper motor</li><li>DC motor with gearbox</li><li>L298N motor driver</li><li>FSRs</li><li>LEDs (Red, Green)</li></ul>",
+                "<strong>5. Final System diagram</strong><ul style='margin-top:0.2rem; margin-bottom:0'><li>Raspberry Pi Pico reads sensors and controls motors through the L298N driver.</li><li>12V Power supply powers the motors, 5V steps down to power the Pi.</li></ul>"
+              ]
+            },
+            {
+              type: 'text',
+              title: "The final Product",
               icon: "✅",
               color: "green",
               width: "full",
+              content: [
+                "<strong>Features:</strong>"
+              ],
               listItems: [
-                "we were only able to complete the <strong>lifting and twisting</strong> mechanism as a <strong>lower fidelity</strong> prototype. It worked through <strong>sequential</strong> steps of the motors, we were able to open a pill bottle lid in our <strong>demonstration</strong>."
-              ]
+                "Insert the pill bottle into the base holder",
+                "Platform lowers to engage the bottle lid",
+                "DC motor twists to unscrew the lid",
+                "LEDs display status (Red = processing, Green = open)"
+              ],
+              image: {
+                src: "https://via.placeholder.com/400x300/222/aaa?text=Video+Thumbnail",
+                alt: "Video Thumbnail",
+                position: 'right'
+              }
             }
           ]
         },
@@ -643,14 +677,14 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
           cards: [
             {
               type: 'text',
-              title: "Conclusion + Reflection",
+              title: "My Overall Contributions:",
               icon: "🌟",
               color: "green",
               width: "full",
               listItems: [
-                "<strong>My Overall Contributions:</strong>",
-                "Brainstorming, ideation, design",
-                "Created the CAD models"
+                "Created the code logic for motor sequence",
+                "Wired the breadboard and sensor inputs",
+                "Helped assemble the structural housing"
               ]
             },
             {
@@ -684,7 +718,6 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
       path: "/projects/dp4",
       title: "Design Project 4: Earring application gun",
       icon: "🔫",
-      headerImage: dp4Header,
       sections: [
         {
           title: "Overview",
@@ -711,7 +744,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               title: "Patient Summary:",
               icon: "👤",
               color: "red",
-              width: "two-thirds",
+              width: "half",
               listItems: [
                 "We were introduced to <strong>real patients</strong> and challenged to identify and try to improve one of their challenges.",
                 "<strong>Jany</strong> has MS, and mentioned having trouble putting on stud earrings because of limited dexterity, so she now wears hoops instead. We hoped to create device that allowed her to independently put studs on again."
@@ -719,13 +752,15 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
             },
             {
               type: 'text',
-              title: "Background Info, if needed:",
-              icon: "🧠",
+              title: "Identifying Goals: the problem to solve",
+              icon: "🎯",
               color: "brown",
-              width: "third",
+              width: "half",
               listItems: [
-                "<strong>Stud Earrings:</strong> Smaller, harder to handle",
-                "<strong>MS:</strong> Multiple Sclerosis, a chronic autoimmune disease where the immune system attacks myelin sheaths of nerves. Symptoms include fatigue, numbness, tingling, walking difficulty, and <strong>impaired dexterity</strong>."
+                "Should be <strong>comfortable</strong> to use",
+                "Should be <strong>efficient</strong> to use",
+                "Should be <strong>portable</strong> and not bulky",
+                "Should improve <strong>independence</strong>"
               ]
             }
           ]
@@ -735,26 +770,10 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
           cards: [
             {
               type: 'text',
-              title: "Identifying Goals: the problem to solve",
-              icon: "🎯",
-              color: "blue",
-              width: "full",
-              content: [
-                "<strong>Objectives:</strong>"
-              ],
-              listItems: [
-                "Should be <strong>comfortable</strong> to use",
-                "Should be <strong>efficient</strong> to use",
-                "Should be <strong>portable</strong> and not bulky",
-                "Should improve <strong>independence</strong>"
-              ]
-            },
-            {
-              type: 'text',
               title: "Constraints:",
               icon: "🛑",
-              color: "brown",
-              width: "full",
+              color: "blue",
+              width: "half",
               listItems: [
                 "adhere to health and safety <strong>standards</strong>",
                 "Must be usable with Jany’s current <strong>finger dexterity</strong>",
@@ -766,11 +785,11 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               type: 'text',
               title: "Initial Thoughts:",
               icon: "💡",
-              color: "purple",
-              width: "full",
+              color: "blue",
+              width: "half",
               listItems: [
                 "<strong>Scissor</strong> mechanism: simple, adaptable to multiple functions",
-                "<strong>Motorized closing possibilities:</strong> wind up string, cam and linkage, linear actuator pushing it down",
+                "<strong>Motorized closing possibilities:</strong><ul style='margin-top:0.2rem; margin-bottom:0'><li>wind up string</li><li>cam and linkage</li><li>linear actuator pushing it down</li></ul>",
                 "<strong>Materials:</strong> Plastic: cheap and usable"
               ]
             },
@@ -778,14 +797,19 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               type: 'text',
               title: "Brainstorm and discussion with group:",
               icon: "💬",
-              color: "blue",
+              color: "purple",
               width: "full",
               listItems: [
                 "We decided to <strong>focus</strong> on the earing applying function first",
                 "We divided the work, someone else will do the earing holder and backing holder",
                 "I will CAD the scissor mechanism in a <strong>basic</strong> form",
                 "We need further thought one the specifics for loading the earing pieces, how can it be <strong>easier</strong> than just using <strong>hands</strong>?"
-              ]
+              ],
+              image: {
+                src: "https://via.placeholder.com/300x400/222/aaa?text=Earring+Holder+Prototype",
+                alt: "Prototype",
+                position: 'right'
+              }
             },
             {
               type: 'text',
@@ -802,7 +826,12 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "3. Starting on a new prototype, we decided to keep the same <strong>general</strong> concept, but now focus on <strong>efficient</strong> material use, <strong>ergonomics</strong> and <strong>aesthetics</strong>. The case would be fully <strong>enclosed</strong> to protect the mechanism. parts would be <strong>thinner</strong> where they did not need to be so thick, like the <strong>gears and racks</strong>.",
                 "4. I started from scratch, creating <strong>thinner</strong> gears and racks. The case was split in <strong>two parts</strong> that would connect in the middle with pegs. A wavy texture was added to the <strong>exterior</strong> of the case for <strong>grip</strong> with <strong>freeform</strong> modelling. made ergonomic handles that would be comfortable and <strong>easy</strong> to grip.",
                 "5. Adjusted the locations of a few of the pegs and shifted the gaps for the handle and holders to slide because my measurements were slightly off. Created an assembly and constrained the parts to test virtual. Then we began printing."
-              ]
+              ],
+              image: {
+                src: "https://via.placeholder.com/300x400/222/aaa?text=CAD+Earring+Gun",
+                alt: "CAD Gun",
+                position: 'right'
+              }
             },
             {
               type: 'text',
@@ -819,7 +848,12 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "<strong>Place</strong> both pieces on the “gun”",
                 "<strong>Squeeze</strong> the intuitive an ergonomic handle",
                 "The rack and pinion will <strong>reverse</strong> and <strong>scales</strong> down the motion, bringing the backing into the earing that's already on your ear"
-              ]
+              ],
+              image: {
+                src: "https://via.placeholder.com/400x200/222/aaa?text=JANEASY+Pro+Pierce",
+                alt: "JANEASY Pro Pierce",
+                position: 'right'
+              }
             }
           ]
         },

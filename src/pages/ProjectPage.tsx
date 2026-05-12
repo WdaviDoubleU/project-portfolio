@@ -103,7 +103,7 @@ const CardComponent: React.FC<{ card: CalloutCard, isMobile: boolean }> = ({ car
                                     <span style={{ color: card.color === 'green' ? '#4ade80' : 'rgba(255,255,255,0.5)', marginTop: '2px', flexShrink: 0 }}>
                                         {card.color === 'green' ? '✅' : '•'}
                                     </span>
-                                    <span dangerouslySetInnerHTML={{ __html: item }} />
+                                    <div className="callout-list" dangerouslySetInnerHTML={{ __html: item }} />
                                 </li>
                             ))}
                         </ul>
@@ -184,8 +184,13 @@ const ProjectPage: React.FC = () => {
         <div style={{ paddingBottom: '4rem' }}>
             <div className="container" style={{ paddingTop: '8rem', maxWidth: '1100px' }}>
                 {/* Title */}
-                <div style={{ marginBottom: '4rem' }}>
+                <div style={{ marginBottom: '4rem', textAlign: 'center' }}>
                     <AnimatedBlock>
+                        <div style={{ fontSize: '5rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.2))' }}>
+                            {project.icon}
+                        </div>
+                    </AnimatedBlock>
+                    <AnimatedBlock delay="delay-1">
                         <h1 style={{ fontSize: '2.5rem', margin: 0, fontWeight: 800, color: '#fff', letterSpacing: '0.05em' }}>
                             {project.title}
                         </h1>
