@@ -1,15 +1,14 @@
-import dp2Header from '../assets/dp2_header.png';
-import dp2FinalPrototype from '../assets/dp2_final_prototype.png';
-import dp2InitialIdeas from '../assets/dp2_initial_ideas.png';
-import dp2ScrewSketches from '../assets/dp2_screw_sketches.png';
-import dp2FinalCad from '../assets/dp2_final_cad.png';
-import dp2CadIterations from '../assets/dp2_cad_iteration_all.png';
 import dp1BoardAllIdeas from '../assets/dp1_board_all_ideas.png';
 import dp1BoardIdeas12 from '../assets/dp1_board_ideas12.png';
 import dp1CadClipRing from '../assets/dp1_cad_clip_ring.png';
 import dp1CadTwistRing from '../assets/dp1_cad_twist_ring.png';
 import dp1Poster from '../assets/dp1_poster.png';
 import dp1FinalPrototype from '../assets/dp1_final_prototype.png';
+
+/** Placeholder graphics until project-specific assets exist */
+function placeholderImage(width: number, height: number, label: string): string {
+  return `https://via.placeholder.com/${width}x${height}/222/aaa?text=${encodeURIComponent(label)}`;
+}
 
 export type CalloutColor = 'green' | 'brown' | 'blue' | 'purple' | 'red';
 
@@ -40,7 +39,6 @@ export interface Project {
   icon: string;
   path: string;
   description?: string;
-  headerImage?: string;
   sections: Section[];
 }
 
@@ -328,7 +326,6 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
       path: "/projects/hip-implant",
       title: "Design Project 2: Designing a Hip Implant",
       icon: "🦴",
-      headerImage: dp2Header,
       sections: [
         {
           title: "Overview",
@@ -386,7 +383,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               type: 'image',
               width: 'third',
               image: {
-                src: dp2FinalPrototype,
+                src: placeholderImage(400, 320, '3D printed hip implant prototypes'),
                 alt: "Final 3D Printed Hip Implant prototypes (75% and 100% scale)"
               }
             }
@@ -416,7 +413,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "<strong>Liners:</strong> place liners on the head and socket without removing bone"
               ],
               image: {
-                src: dp2ScrewSketches,
+                src: placeholderImage(520, 360, 'Initial hip implant sketches'),
                 alt: "Initial sketches of full replacement screw design and joint liners",
                 position: 'right'
               }
@@ -434,7 +431,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "the joint lining idea would wear and not fix bone complications<ul style='margin-top:0.2rem; margin-bottom:0'><li>(also not allowed in project constraints)</li></ul>"
               ],
               image: {
-                src: dp2InitialIdeas,
+                src: placeholderImage(520, 360, 'Hip implant brainstorm'),
                 alt: "Whiteboard brainstorm of hip implant ideas including materials and mechanical concepts",
                 position: 'right'
               }
@@ -453,7 +450,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "2. My second prototype had a a straighter stem that now <strong>fit</strong> the patient’s <strong>femur</strong>. But it still may not handle the <strong>stresses</strong> well, we eventually decided the curve would be so small it shouldn’t be needed."
               ],
               image: {
-                src: dp2CadIterations,
+                src: placeholderImage(520, 360, 'CAD femoral stem iterations'),
                 alt: "CAD iterations of the femoral stem showing progression from curved to straight geometry and refined details",
                 position: 'right'
               }
@@ -471,7 +468,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "Four pegs on the acetabular cup grip into the pelvis for a secure hold."
               ],
               image: {
-                src: dp2FinalCad,
+                src: placeholderImage(520, 360, 'Final hip implant CAD'),
                 alt: "Final CAD render of hip stem assembly",
                 position: 'right'
               }
@@ -491,7 +488,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "<strong>Texture</strong> of slots and slight screw ridges to promote <strong>osteointegration</strong>"
               ],
               image: {
-                src: "https://via.placeholder.com/600x300/222/aaa?text=Poster+Presentation",
+                src: placeholderImage(600, 300, 'Poster Presentation'),
                 alt: "Poster",
                 position: 'bottom'
               }
@@ -636,7 +633,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "<strong>Code:</strong><ul style='margin-top:0.2rem; margin-bottom:0'><li>A giant while loop</li><li>takes in FSR outputs</li><li>calculates <strong>rolling average</strong> for each: for loop, 5 times, that appends to a list then finds average</li><li><strong>conditions</strong> to check if each of the motors should be <strong>activated</strong></li><li>Turn on <strong>LEDs</strong> to show <strong>status</strong></li></ul>"
               ],
               image: {
-                src: "https://via.placeholder.com/300x400/222/aaa?text=Initial+Prototype",
+                src: placeholderImage(300, 400, 'Initial Prototype'),
                 alt: "Initial Prototype",
                 position: 'right'
               }
@@ -652,7 +649,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "<strong>Our YouTube video:</strong>"
               ],
               image: {
-                src: "https://via.placeholder.com/400x300/222/aaa?text=CAD+Base",
+                src: placeholderImage(400, 300, 'CAD Base'),
                 alt: "CAD Base",
                 position: 'right'
               }
@@ -690,7 +687,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "LEDs display status (Red = processing, Green = open)"
               ],
               image: {
-                src: "https://via.placeholder.com/400x300/222/aaa?text=Video+Thumbnail",
+                src: placeholderImage(400, 300, 'Video Thumbnail'),
                 alt: "Video Thumbnail",
                 position: 'right'
               }
@@ -831,7 +828,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "We need further thought one the specifics for loading the earing pieces, how can it be <strong>easier</strong> than just using <strong>hands</strong>?"
               ],
               image: {
-                src: "https://via.placeholder.com/300x400/222/aaa?text=Earring+Holder+Prototype",
+                src: placeholderImage(300, 400, 'Earring Holder Prototype'),
                 alt: "Prototype",
                 position: 'right'
               }
@@ -853,7 +850,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "5. Adjusted the locations of a few of the pegs and shifted the gaps for the handle and holders to slide because my measurements were slightly off. Created an assembly and constrained the parts to test virtual. Then we began printing."
               ],
               image: {
-                src: "https://via.placeholder.com/300x400/222/aaa?text=CAD+Earring+Gun",
+                src: placeholderImage(300, 400, 'CAD Earring Gun'),
                 alt: "CAD Gun",
                 position: 'right'
               }
@@ -875,7 +872,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "The rack and pinion will <strong>reverse</strong> and <strong>scales</strong> down the motion, bringing the backing into the earing that's already on your ear"
               ],
               image: {
-                src: "https://via.placeholder.com/400x200/222/aaa?text=JANEASY+Pro+Pierce",
+                src: placeholderImage(400, 200, 'JANEASY Pro Pierce'),
                 alt: "JANEASY Pro Pierce",
                 position: 'right'
               }
@@ -975,7 +972,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "The interface was designed to be <strong>accessible</strong> for elderly users, featuring large text, high-contrast visual cues, and intuitive physical feedback."
               ],
               image: {
-                src: "https://via.placeholder.com/600x300/222/aaa?text=MediMonitor+Interface",
+                src: placeholderImage(600, 300, 'MediMonitor Interface'),
                 alt: "UI Mockup",
                 position: 'bottom'
               }
@@ -1025,7 +1022,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               type: 'image',
               width: 'third',
               image: {
-                src: "https://via.placeholder.com/300x400/222/aaa?text=Exercise+Machine+CAD",
+                src: placeholderImage(300, 400, 'Exercise Machine CAD'),
                 alt: "CAD model of Fan of Exercise"
               }
             }

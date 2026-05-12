@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { portfolioData, Section, CalloutCard, CalloutColor } from '../data/content';
 import '../styles/index.css';
 
 import AnimatedBlock from '../components/AnimatedBlock';
 
-// Helper to get Art Deco inspired colors for the callout cards
 const getCardStyle = (color?: CalloutColor) => {
     switch (color) {
         case 'green':
-            return { bg: 'transparent', border: '#4ade80', text: '#e6f2eb' };
+            return { border: '#4ade80', text: '#e6f2eb' };
         case 'brown':
-            return { bg: 'transparent', border: '#fb923c', text: '#f5ebe3' };
+            return { border: '#fb923c', text: '#f5ebe3' };
         case 'blue':
-            return { bg: 'transparent', border: '#60a5fa', text: '#e3ebf5' };
+            return { border: '#60a5fa', text: '#e3ebf5' };
         case 'purple':
-            return { bg: 'transparent', border: '#c084fc', text: '#f2e6f3' };
+            return { border: '#c084fc', text: '#f2e6f3' };
         case 'red':
-            return { bg: 'transparent', border: '#f87171', text: '#f5e3e3' };
+            return { border: '#f87171', text: '#f5e3e3' };
         default:
-            return { bg: 'transparent', border: 'rgba(255,255,255,0.2)', text: 'var(--text-color)' };
+            return { border: 'rgba(255,255,255,0.2)', text: 'var(--text-color)' };
     }
 };
 
@@ -57,7 +57,7 @@ const CardComponent: React.FC<{ card: CalloutCard, isMobile: boolean }> = ({ car
     return (
         <div style={{
             width: getWidthPercent(card.width, isMobile),
-            background: theme.bg,
+            background: 'transparent',
             border: `1px solid ${theme.border}`,
             padding: '1.5rem',
             borderRadius: '0',
@@ -160,21 +160,26 @@ const SectionView: React.FC<{ section: Section, isMobile: boolean }> = ({ sectio
     );
 };
 
+const MOBILE_QUERY = '(max-width: 767px)';
+
 const ProjectPage: React.FC = () => {
-    const path = window.location.pathname;
-    const project = portfolioData.projects.find(p => p.path === path);
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const { pathname } = useLocation();
+    const project = useMemo(
+        () => portfolioData.projects.find((p) => p.path === pathname),
+        [pathname]
+    );
+    const [isMobile, setIsMobile] = useState(() => window.matchMedia(MOBILE_QUERY).matches);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+    }, [pathname]);
 
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [path]);
+    useEffect(() => {
+        const mq = window.matchMedia(MOBILE_QUERY);
+        const onChange = () => setIsMobile(mq.matches);
+        mq.addEventListener('change', onChange);
+        return () => mq.removeEventListener('change', onChange);
+    }, []);
 
     if (!project) {
         return <div className="container" style={{ padding: '4rem' }}>Project not found</div>;

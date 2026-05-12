@@ -4,6 +4,15 @@ import { useTheme } from '../ThemeContext';
 import { portfolioData } from '../data/content';
 import '../styles/index.css';
 
+const ACCENT_PRESETS = [
+    { name: 'Yellow', color: '#f9db6d' },
+    { name: 'Blue', color: '#6db4f9' },
+    { name: 'Green', color: '#6df9a8' },
+    { name: 'Purple', color: '#b66df9' },
+    { name: 'Pink', color: '#f96db4' },
+    { name: 'Orange', color: '#f9a86d' }
+] as const;
+
 interface LayoutProps {
     children: React.ReactNode;
 }
@@ -167,14 +176,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                 gridTemplateColumns: 'repeat(3, 1fr)',
                                 gap: '0.5rem'
                             }}>
-                                {[
-                                    { name: 'Yellow', color: '#f9db6d' },
-                                    { name: 'Blue', color: '#6db4f9' },
-                                    { name: 'Green', color: '#6df9a8' },
-                                    { name: 'Purple', color: '#b66df9' },
-                                    { name: 'Pink', color: '#f96db4' },
-                                    { name: 'Orange', color: '#f9a86d' }
-                                ].map(({ name, color }) => (
+                                {ACCENT_PRESETS.map(({ name, color }) => (
                                     <button
                                         key={name}
                                         onClick={() => {
@@ -233,8 +235,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         Home
                     </Link>
 
-                    <div 
-                        style={{ position: 'relative' }} 
+                    <div
+                        style={{ position: 'relative' }}
                         data-projects-container
                         onMouseEnter={() => setProjectsMenuOpen(true)}
                         onMouseLeave={() => setProjectsMenuOpen(false)}
@@ -250,66 +252,70 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                 opacity: projectsMenuOpen ? 1 : 0.6,
                                 transition: 'opacity 0.2s ease',
                                 color: '#fff',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '0.5rem',
                                 textDecoration: 'none'
                             }}
                         >
-                            Projects {projectsMenuOpen ? '▲' : '▼'}
+                            Projects
                         </a>
 
-                        {/* Projects Dropdown Menu */}
+                        {/* paddingTop = hover bridge (margin would create a dead zone and close the menu) */}
                         {projectsMenuOpen && (
-                            <div style={{
-                                position: 'absolute',
-                                top: 'auto',
-                                right: '-0.8rem',
-                                marginTop: '1.2rem',
-                                background: 'var(--card-bg)',
-                                backdropFilter: 'blur(16px) saturate(180%)',
-                                WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-                                borderRadius: '24px',
-                                border: '1px solid rgba(255, 255, 255, 0.08)',
-                                padding: '1.2rem',
-                                minWidth: '220px',
-                                boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
-                                zIndex: 1000,
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: '0.5rem'
-                            }}>
-                                {portfolioData.projects.map(project => (
-                                    <Link
-                                        key={project.id}
-                                        to={project.path}
-                                        onClick={() => setProjectsMenuOpen(false)}
-                                        style={{
-                                            color: '#fff',
-                                            padding: '0.8rem',
-                                            borderRadius: '12px',
-                                            textDecoration: 'none',
-                                            fontSize: '0.85rem',
-                                            fontWeight: 600,
-                                            background: 'rgba(255, 255, 255, 0.05)',
-                                            border: '1px solid rgba(255, 255, 255, 0.1)',
-                                            transition: 'all 0.2s ease',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            gap: '0.5rem'
-                                        }}
-                                        onMouseEnter={(e) => {
-                                            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                                            e.currentTarget.style.borderColor = 'var(--accent-color)';
-                                        }}
-                                        onMouseLeave={(e) => {
-                                            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                                            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                                        }}
-                                    >
-                                        <span style={{ fontSize: '1.1rem' }}>{project.icon}</span> {project.title}
-                                    </Link>
-                                ))}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: '100%',
+                                    right: '-0.8rem',
+                                    paddingTop: '0.75rem',
+                                    zIndex: 1000
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        background: 'var(--card-bg)',
+                                        backdropFilter: 'blur(16px) saturate(180%)',
+                                        WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                                        borderRadius: '24px',
+                                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                                        padding: '1.2rem',
+                                        minWidth: '220px',
+                                        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '0.5rem'
+                                    }}
+                                >
+                                    {portfolioData.projects.map((project) => (
+                                        <Link
+                                            key={project.id}
+                                            to={project.path}
+                                            onClick={() => setProjectsMenuOpen(false)}
+                                            style={{
+                                                color: '#fff',
+                                                padding: '0.8rem',
+                                                borderRadius: '12px',
+                                                textDecoration: 'none',
+                                                fontSize: '0.85rem',
+                                                fontWeight: 600,
+                                                background: 'rgba(255, 255, 255, 0.05)',
+                                                border: '1px solid rgba(255, 255, 255, 0.1)',
+                                                transition: 'all 0.2s ease',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '0.5rem'
+                                            }}
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                                                e.currentTarget.style.borderColor = 'var(--accent-color)';
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                                                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                                            }}
+                                        >
+                                            <span style={{ fontSize: '1.1rem' }}>{project.icon}</span> {project.title}
+                                        </Link>
+                                    ))}
+                                </div>
                             </div>
                         )}
                     </div>
