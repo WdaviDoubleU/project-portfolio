@@ -3,9 +3,49 @@ import { Link } from 'react-router-dom';
 import ParticleCloud from '../components/ParticleCloud';
 import AnimatedBlock from '../components/AnimatedBlock';
 import { portfolioData } from '../data/content';
-import profilePic from '../assets/profile.png';
 import '../styles/animations.css';
 import { useTheme } from '../ThemeContext';
+
+/** Bundled photo when present; add `src/assets/profile.png` (any square JPEG/PNG works). */
+const profilePhotoModules = import.meta.glob('../assets/profile.png', { eager: true }) as Record<
+    string,
+    { default: string }
+>;
+const profilePhotoSrc = Object.values(profilePhotoModules)[0]?.default;
+
+function ProfilePhotoFallback({ accentColor }: { accentColor: string }) {
+    const gradId = React.useId().replace(/:/g, '');
+    return (
+        <svg
+            width={200}
+            height={200}
+            viewBox="0 0 200 200"
+            style={{ display: 'block' }}
+            role="img"
+            aria-label="David Wang"
+        >
+            <defs>
+                <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor={accentColor} />
+                    <stop offset="100%" stopColor="#1f1f1f" />
+                </linearGradient>
+            </defs>
+            <rect width="200" height="200" fill={`url(#${gradId})`} />
+            <text
+                x="100"
+                y="108"
+                textAnchor="middle"
+                dominantBaseline="central"
+                fill="rgba(255,255,255,0.92)"
+                fontSize="56"
+                fontFamily="system-ui, -apple-system, Segoe UI, sans-serif"
+                fontWeight={700}
+            >
+                DW
+            </text>
+        </svg>
+    );
+}
 
 const Home: React.FC = () => {
     const { home } = portfolioData;
@@ -72,8 +112,6 @@ const Home: React.FC = () => {
                 background: 'linear-gradient(to bottom, transparent, var(--bg-color) 20%)' // Fade into bg
             }}>
 
-                {/* About / Intro Section */}
-                {/* About / Intro Section */}
                 <section style={{
                     maxWidth: '800px',
                     marginBottom: '8rem',
@@ -89,23 +127,33 @@ const Home: React.FC = () => {
                                     </p>
                                 ))}
                             </div>
-                            {/* Profile Picture */}
-                            <div className="art-deco-border" style={{
-                                width: '200px',
-                                height: '200px',
-                                overflow: 'hidden',
-                                flexShrink: 0,
-                                boxShadow: '0 0 30px rgba(252, 225, 129, 0.2)'
-                            }}>
-                                <img
-                                    src={profilePic}
-                                    alt="David Wang"
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        objectFit: 'cover'
-                                    }}
-                                />
+                            <div
+                                className="art-deco-border"
+                                style={{
+                                    width: '200px',
+                                    height: '200px',
+                                    flexShrink: 0,
+                                    boxShadow: '0 0 30px rgba(252, 225, 129, 0.2)',
+                                    overflow: 'hidden',
+                                    lineHeight: 0
+                                }}
+                            >
+                                {profilePhotoSrc ? (
+                                    <img
+                                        src={profilePhotoSrc}
+                                        alt="David Wang"
+                                        width={200}
+                                        height={200}
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            objectFit: 'cover',
+                                            display: 'block'
+                                        }}
+                                    />
+                                ) : (
+                                    <ProfilePhotoFallback accentColor={accentColor} />
+                                )}
                             </div>
                         </div>
                     </AnimatedBlock>

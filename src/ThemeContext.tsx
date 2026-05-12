@@ -22,22 +22,20 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const [isDarkMode, setIsDarkMode] = useState(true);
 
     useEffect(() => {
-        document.documentElement.style.setProperty('--accent-color', accentColor);
-    }, [accentColor]);
-
-    useEffect(() => {
+        const root = document.documentElement;
+        root.style.setProperty('--accent-color', accentColor);
         if (isDarkMode) {
-            document.documentElement.style.setProperty('--bg-color', '#0c0c0c');
-            document.documentElement.style.setProperty('--text-color', '#f0f0f0');
-            document.documentElement.style.setProperty('--secondary-text', '#a0a0a0');
-            document.documentElement.style.setProperty('--card-bg', '#1a1a1a');
+            root.style.setProperty('--bg-color', '#0c0c0c');
+            root.style.setProperty('--text-color', '#f0f0f0');
+            root.style.setProperty('--secondary-text', '#a0a0a0');
+            root.style.setProperty('--card-bg', '#1a1a1a');
         } else {
-            document.documentElement.style.setProperty('--bg-color', '#ffffff');
-            document.documentElement.style.setProperty('--text-color', '#1a1a1a');
-            document.documentElement.style.setProperty('--secondary-text', '#404040');
-            document.documentElement.style.setProperty('--card-bg', '#fcfcfc');
+            root.style.setProperty('--bg-color', '#ffffff');
+            root.style.setProperty('--text-color', '#1a1a1a');
+            root.style.setProperty('--secondary-text', '#404040');
+            root.style.setProperty('--card-bg', '#fcfcfc');
         }
-    }, [isDarkMode]);
+    }, [accentColor, isDarkMode]);
 
     return (
         <ThemeContext.Provider value={{ accentColor, setAccentColor, isDarkMode, setIsDarkMode }}>

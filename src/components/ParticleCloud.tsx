@@ -20,6 +20,13 @@ interface ParticleCloudProps {
     isDarkMode: boolean;
 }
 
+function hexToRgb(hex: string) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result
+        ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) }
+        : { r: 249, g: 219, b: 109 };
+}
+
 const ParticleCloud: React.FC<ParticleCloudProps> = ({ accentColor, isDarkMode }) => {
     // These 'refs' allow us to access the HTML Canvas and track the mouse
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -53,17 +60,6 @@ const ParticleCloud: React.FC<ParticleCloudProps> = ({ accentColor, isDarkMode }
             // 1. Decide how many dots we want based on screen size
             const density = 0.9;
             const numParticles = Math.min(width * density, 1100);
-
-            // 2. Define a list of colors based on accent color
-            // Helper function to convert hex to RGB
-            const hexToRgb = (hex: string) => {
-                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-                return result ? {
-                    r: parseInt(result[1], 16),
-                    g: parseInt(result[2], 16),
-                    b: parseInt(result[3], 16)
-                } : { r: 249, g: 219, b: 109 }; // fallback to yellow
-            };
 
             const rgb = hexToRgb(accentColor);
 
@@ -104,6 +100,8 @@ const ParticleCloud: React.FC<ParticleCloudProps> = ({ accentColor, isDarkMode }
                 const randomBase = palettes[Math.floor(Math.random() * palettes.length)];
 
                 // Save this dot!
+                // Spread phases across the curve + jitter so pulses are visibly asynchronous
+                const phaseBase = (i / numParticles) * Math.PI * 2 * 7;
                 particles.push({
                     x: x,
                     y: y,
@@ -114,20 +112,11 @@ const ParticleCloud: React.FC<ParticleCloudProps> = ({ accentColor, isDarkMode }
                     originalY: y,
                     color: randomBase,
                     interactRadius: 30 + Math.random() * 100, // Varied radius for each particle
-                    phase: Math.random() * Math.PI * 2,        // Random start phase (0 – 2π)
-                    pulseSpeed: 0.001 + Math.random() * 0.003  // Each dot pulses at its own tempo
+                    phase: phaseBase + Math.random() * Math.PI * 2,
+                    // Radians advanced per frame — wide spread; ~½ prior rate for slower pulse
+                    pulseSpeed: (0.006 + Math.random() * 0.045) * (Math.random() < 0.5 ? 1 : -1)
                 });
             }
-        };
-
-        // Helper function to convert hex to RGB (used in both initParticles and animate)
-        const hexToRgb = (hex: string) => {
-            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-            return result ? {
-                r: parseInt(result[1], 16),
-                g: parseInt(result[2], 16),
-                b: parseInt(result[3], 16)
-            } : { r: 249, g: 219, b: 109 }; // fallback to yellow
         };
 
         // This is the animation loop that runs ~60 times per second
@@ -151,9 +140,9 @@ const ParticleCloud: React.FC<ParticleCloudProps> = ({ accentColor, isDarkMode }
             // Each particle has its own phase & speed — advance them individually
 
             particles.forEach(p => {
-                // PER-PARTICLE PULSE — unique phase so dots breathe out of sync
+                // PER-PARTICLE PULSE — unique phase & speed so dots breathe out of sync
                 p.phase += p.pulseSpeed;
-                const pulse = 1 + Math.sin(p.phase) * 0.2;
+                const pulse = 1 + Math.sin(p.phase) * 0.38;
 
                 // 1. MOUSE INTERACTION
                 const dx = mouseRef.current.x - p.x;
