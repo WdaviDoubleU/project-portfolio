@@ -5,13 +5,16 @@ import AnimatedBlock from '../components/AnimatedBlock';
 import { portfolioData } from '../data/content';
 import profilePic from '../assets/profile.png';
 import '../styles/animations.css';
+import { useTheme } from '../ThemeContext';
 
 const Home: React.FC = () => {
     const { home } = portfolioData;
 
+    const { accentColor, isDarkMode } = useTheme();
+
     return (
         <div style={{ position: 'relative', minHeight: '100vh' }}>
-            <ParticleCloud />
+            <ParticleCloud accentColor={accentColor} isDarkMode={isDarkMode} />
 
             {/* Hero Section */}
             <div style={{
@@ -30,10 +33,17 @@ const Home: React.FC = () => {
                     marginBottom: '1rem',
                     fontWeight: 700,
                     paddingBottom: '0.1em', // Prevent 'g' from being clipped
-                    background: 'linear-gradient(to right, var(--accent-color), #fff)', // Gradient text
+                    display: 'inline-block', // Required for gradient text to work properly
+                    backgroundImage: isDarkMode
+                        ? `linear-gradient(to right, ${accentColor}, #fff)`
+                        : `linear-gradient(to right, ${accentColor}, #1a1a1a)`, // Gradient ends in dark grey for light mode
+                    backgroundSize: '100%',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundClip: 'text',
                     WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                }}>
+                    WebkitTextFillColor: 'transparent',
+                    color: 'transparent'
+                } as React.CSSProperties}>
                     David Wang
                 </h1>
                 <p className="fade-in delay-1" style={{
@@ -80,13 +90,11 @@ const Home: React.FC = () => {
                                 ))}
                             </div>
                             {/* Profile Picture */}
-                            <div style={{
+                            <div className="art-deco-border" style={{
                                 width: '200px',
                                 height: '200px',
-                                borderRadius: '24px',
-                                overflow: 'hidden', // Ensure image respects border radius
+                                overflow: 'hidden',
                                 flexShrink: 0,
-                                border: '4px solid var(--accent-color)',
                                 boxShadow: '0 0 30px rgba(252, 225, 129, 0.2)'
                             }}>
                                 <img
@@ -130,13 +138,14 @@ const Home: React.FC = () => {
                                     style={{
                                         background: 'var(--card-bg)',
                                         padding: '2rem',
-                                        borderRadius: '16px',
+                                        borderRadius: '0',
                                         border: '1px solid rgba(255,255,255,0.05)',
                                         transition: 'transform 0.3s ease, border-color 0.3s ease',
                                         cursor: 'pointer',
                                         display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '1rem'
+                                        flexDirection: 'column',
+                                        alignItems: 'stretch',
+                                        gap: '1.5rem'
                                     }}
                                     onMouseEnter={(e) => {
                                         e.currentTarget.style.transform = 'translateY(-5px)';
@@ -147,8 +156,29 @@ const Home: React.FC = () => {
                                         e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
                                     }}
                                 >
-                                    <div style={{ fontSize: '2rem' }}>{project.icon}</div>
-                                    <h4 style={{ fontSize: '1.2rem', color: 'var(--text-color)' }}>{project.title}</h4>
+                                    {/* Image Placeholder */}
+                                    <div style={{
+                                        width: '100%',
+                                        height: '200px',
+                                        background: 'rgba(0,0,0,0.2)',
+                                        border: '1px dashed var(--secondary-text)',
+                                        borderRadius: '0',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        fontSize: '3rem',
+                                        transition: 'border-color 0.3s ease'
+                                    }}>
+                                        {project.icon}
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                        <h4 style={{ fontSize: '1.4rem', color: 'var(--text-color)', margin: 0 }}>{project.title}</h4>
+                                        {project.description && (
+                                            <p style={{ fontSize: '1rem', color: 'var(--secondary-text)', margin: 0, lineHeight: 1.5 }}>
+                                                {project.description}
+                                            </p>
+                                        )}
+                                    </div>
                                 </Link>
                             ))}
                         </div>

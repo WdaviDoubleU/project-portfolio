@@ -4,12 +4,14 @@ interface AnimatedBlockProps {
     children: React.ReactNode;
     delay?: string;
     className?: string;
+    style?: React.CSSProperties;
 }
 
 const AnimatedBlock: React.FC<AnimatedBlockProps> = ({
     children,
     delay = '',
-    className = ''
+    className = '',
+    style
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -34,6 +36,7 @@ const AnimatedBlock: React.FC<AnimatedBlockProps> = ({
         <div
             ref={ref}
             className={`${className} animate-on-scroll ${isVisible ? 'visible' : ''} ${delay}`}
+            style={style}
         >
             {children}
         </div>

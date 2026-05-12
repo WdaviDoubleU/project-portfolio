@@ -1,82 +1,179 @@
-import React, { useEffect } from 'react';
-import { portfolioData, Section } from '../data/content';
+import React, { useEffect, useState } from 'react';
+import { portfolioData, Section, CalloutCard, CalloutColor } from '../data/content';
 import '../styles/index.css';
 
 import AnimatedBlock from '../components/AnimatedBlock';
 
-const SectionRenderer: React.FC<{ section: Section }> = ({ section }) => {
+// Helper to get Art Deco inspired colors for the callout cards
+const getCardStyle = (color?: CalloutColor) => {
+    switch (color) {
+        case 'green':
+            return { bg: 'transparent', border: '#4ade80', text: '#e6f2eb' };
+        case 'brown':
+            return { bg: 'transparent', border: '#fb923c', text: '#f5ebe3' };
+        case 'blue':
+            return { bg: 'transparent', border: '#60a5fa', text: '#e3ebf5' };
+        case 'purple':
+            return { bg: 'transparent', border: '#c084fc', text: '#f2e6f3' };
+        case 'red':
+            return { bg: 'transparent', border: '#f87171', text: '#f5e3e3' };
+        default:
+            return { bg: 'transparent', border: 'rgba(255,255,255,0.2)', text: 'var(--text-color)' };
+    }
+};
+
+const getWidthPercent = (width: 'full' | 'half' | 'third' | 'two-thirds', isMobile: boolean) => {
+    if (isMobile) return '100%';
+    switch (width) {
+        case 'full': return '100%';
+        case 'half': return 'calc(50% - 0.5rem)';
+        case 'third': return 'calc(33.333% - 0.66rem)';
+        case 'two-thirds': return 'calc(66.666% - 0.33rem)';
+        default: return '100%';
+    }
+};
+
+const CardComponent: React.FC<{ card: CalloutCard, isMobile: boolean }> = ({ card, isMobile }) => {
+    if (card.type === 'image' && card.image) {
+        return (
+            <div style={{
+                width: getWidthPercent(card.width, isMobile),
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'rgba(0,0,0,0.2)',
+                borderRadius: '0',
+                border: '1px solid rgba(255,255,255,0.05)',
+                overflow: 'hidden',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
+            }}>
+                <img src={card.image.src} alt={card.image.alt} style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }} />
+            </div>
+        );
+    }
+
+    const theme = getCardStyle(card.color);
+
     return (
-        <div style={{ marginBottom: '3rem' }}>
-            <AnimatedBlock>
-                <h3 style={{ fontSize: '1.8rem', marginBottom: '1rem', borderLeft: '4px solid var(--accent-color)', paddingLeft: '1rem' }}>
-                    {section.title}
-                </h3>
-            </AnimatedBlock>
-
-            <AnimatedBlock delay="delay-1">
-                {section.content.map((p, i) => (
-                    <p key={i} style={{ marginBottom: '1rem', color: '#ccc' }}>{p}</p>
-                ))}
-            </AnimatedBlock>
-
-            {section.listItems && (
-                <AnimatedBlock delay="delay-2">
-                    <ul style={{ listStyle: 'none', marginLeft: '1rem', marginBottom: '1.5rem' }}>
-                        {section.listItems.map((item, i) => (
-                            <li key={i} style={{ marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <span style={{ color: 'var(--accent-color)' }}>•</span> {item}
-                            </li>
-                        ))}
-                    </ul>
-                </AnimatedBlock>
+        <div style={{
+            width: getWidthPercent(card.width, isMobile),
+            background: theme.bg,
+            border: `1px solid ${theme.border}`,
+            padding: '1.5rem',
+            borderRadius: '0',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem'
+        }}>
+            {/* Card Header */}
+            {(card.title || card.icon) && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: card.content || card.listItems ? '0.5rem' : '0' }}>
+                    {card.icon && <span style={{ fontSize: '1.2rem' }}>{card.icon}</span>}
+                    {card.title && <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: 0, color: '#fff', letterSpacing: '0.05em' }}>{card.title}</h3>}
+                </div>
             )}
 
-            {section.imagePlaceholder && (
-                <AnimatedBlock delay="delay-2">
-                    <div style={{
-                        background: '#222',
-                        border: '1px dashed #444',
-                        borderRadius: '8px',
-                        padding: '2rem',
-                        textAlign: 'center',
-                        color: '#666',
-                        margin: '1rem 0 2rem 0',
-                        minHeight: '200px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexDirection: 'column'
-                    }}>
-                        <span style={{ fontSize: '2rem', marginBottom: '1rem' }}>🖼️</span>
-                        <p style={{ margin: 0 }}>{section.imagePlaceholder}</p>
-                    </div>
-                </AnimatedBlock>
-            )}
-
-            {section.subSections && (
-                <div style={{ marginLeft: '1rem', borderLeft: '1px solid #333', paddingLeft: '1rem', marginTop: '2rem' }}>
-                    {section.subSections.map((sub, i) => (
-                        <SectionRenderer key={i} section={sub} />
+            {/* Card Body and optional right-aligned image */}
+            <div style={{ display: 'flex', flexDirection: isMobile || card.image?.position === 'bottom' ? 'column' : 'row', gap: '1.5rem' }}>
+                <div style={{ flex: 1 }}>
+                    {card.content && card.content.map((p, i) => (
+                        <p key={i} style={{ marginBottom: '1rem', color: theme.text, lineHeight: '1.6', fontSize: '0.95rem' }} dangerouslySetInnerHTML={{ __html: p }}></p>
                     ))}
+
+                    {card.listItems && (
+                        <ul style={{
+                            listStyle: 'none',
+                            padding: 0,
+                            margin: 0,
+                            display: card.twoColumnList && !isMobile ? 'grid' : 'block',
+                            gridTemplateColumns: card.twoColumnList && !isMobile ? '1fr 1fr' : '1fr',
+                            gap: card.twoColumnList ? '0.5rem 1rem' : '0'
+                        }}>
+                            {card.listItems.map((item, i) => (
+                                <li key={i} style={{
+                                    marginBottom: '0.75rem',
+                                    display: 'flex',
+                                    alignItems: 'flex-start',
+                                    gap: '0.5rem',
+                                    color: theme.text,
+                                    fontSize: '0.9rem',
+                                    lineHeight: '1.5'
+                                }}>
+                                    <span style={{ color: card.color === 'green' ? '#4ade80' : 'rgba(255,255,255,0.5)', marginTop: '2px', flexShrink: 0 }}>
+                                        {card.color === 'green' ? '✅' : '•'}
+                                    </span>
+                                    <div className="callout-list" dangerouslySetInnerHTML={{ __html: item }} />
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+
+                {card.image && card.image.position === 'right' && (
+                    <div style={{ width: isMobile ? '100%' : '35%', flexShrink: 0 }}>
+                        <img src={card.image.src} alt={card.image.alt} style={{ width: '100%', borderRadius: '0', border: `1px solid ${theme.border}`, display: 'block' }} />
+                    </div>
+                )}
+            </div>
+
+            {card.image && card.image.position === 'bottom' && (
+                <div style={{ marginTop: '0.5rem' }}>
+                    <img src={card.image.src} alt={card.image.alt} style={{ width: '100%', borderRadius: '0', border: `1px solid ${theme.border}`, display: 'block' }} />
                 </div>
             )}
         </div>
     );
 };
 
-const ProjectPage: React.FC = () => {
-    // Get the last segment of the URL to match the project
-    // In a real app we might use a slug or id param, but here we strictly match the path 
-    // or pass the project ID via route props. 
-    // Let's assume the router passes the project ID or we find it.
+const SectionView: React.FC<{ section: Section, isMobile: boolean }> = ({ section, isMobile }) => {
+    return (
+        <div style={{ marginBottom: '4rem' }}>
+            <AnimatedBlock delay="delay-1">
+                <h2 style={{
+                    fontSize: '1.4rem',
+                    marginBottom: '1.5rem',
+                    color: '#fff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.05em'
+                }}>
+                    <span style={{ color: 'var(--accent-color)' }}>◆</span> {section.title}
+                </h2>
+            </AnimatedBlock>
 
-    // Actually, to make it simple with the data structure:
-    // We will pass the 'id' as a prop or find it by window.location.pathname
+            <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '1rem',
+                alignItems: 'stretch'
+            }}>
+                {section.cards.map((card, i) => (
+                    <AnimatedBlock key={i} delay={`delay-${Math.min(i % 3 + 1, 3)}`} style={{ display: 'contents' }}>
+                        <CardComponent card={card} isMobile={isMobile} />
+                    </AnimatedBlock>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const ProjectPage: React.FC = () => {
     const path = window.location.pathname;
     const project = portfolioData.projects.find(p => p.path === path);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, [path]);
 
     if (!project) {
@@ -84,60 +181,27 @@ const ProjectPage: React.FC = () => {
     }
 
     return (
-        <div className="container" style={{ paddingTop: '2rem', paddingBottom: '4rem', maxWidth: '900px' }}>
-
-            {/* Header */}
-            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-                <AnimatedBlock>
-                    <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>{project.icon}</div>
-                </AnimatedBlock>
-                <AnimatedBlock delay="delay-1">
-                    <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{project.title}</h1>
-                </AnimatedBlock>
-                <AnimatedBlock delay="delay-2">
-                    <p style={{ fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto', color: '#888' }}>
-                        {project.overview}
-                    </p>
-                </AnimatedBlock>
-            </div>
-
-            {/* Skills Grid (Animated Boxes) */}
-            <div style={{ marginBottom: '4rem' }}>
-                <AnimatedBlock>
-                    <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', borderBottom: '1px solid #333', paddingBottom: '0.5rem' }}>
-                        Skills Applied & Learned
-                    </h2>
-                </AnimatedBlock>
-
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                    gap: '1.5rem'
-                }}>
-                    {project.skills.map((skill, i) => (
-                        <AnimatedBlock key={i} delay={`delay-${Math.min(i + 1, 3)}`}>
-                            <div style={{
-                                background: 'var(--card-bg)',
-                                padding: '1.5rem',
-                                borderRadius: '12px',
-                                border: '1px solid rgba(255,255,255,0.05)',
-                                height: '100%'
-                            }}>
-                                <h4 style={{ color: 'var(--accent-color)', marginBottom: '0.5rem' }}>{skill.title}</h4>
-                                <p style={{ fontSize: '0.9rem', margin: 0 }}>{skill.desc}</p>
-                            </div>
-                        </AnimatedBlock>
-                    ))}
+        <div style={{ paddingBottom: '4rem' }}>
+            <div className="container" style={{ paddingTop: '8rem', maxWidth: '1100px' }}>
+                {/* Title */}
+                <div style={{ marginBottom: '4rem', textAlign: 'center' }}>
+                    <AnimatedBlock>
+                        <div style={{ fontSize: '5rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.2))' }}>
+                            {project.icon}
+                        </div>
+                    </AnimatedBlock>
+                    <AnimatedBlock delay="delay-1">
+                        <h1 style={{ fontSize: '2.5rem', margin: 0, fontWeight: 800, color: '#fff', letterSpacing: '0.05em' }}>
+                            {project.title}
+                        </h1>
+                    </AnimatedBlock>
                 </div>
-            </div>
 
-            {/* Main Content Sections */}
-            <div>
+                {/* Sections containing Callout Cards */}
                 {project.sections.map((section, i) => (
-                    <SectionRenderer key={i} section={section} />
+                    <SectionView key={i} section={section} isMobile={isMobile} />
                 ))}
             </div>
-
         </div>
     );
 };
