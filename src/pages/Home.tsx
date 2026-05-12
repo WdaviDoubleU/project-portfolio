@@ -1,43 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import ParticleCloud from '../components/ParticleCloud';
 import AnimatedBlock from '../components/AnimatedBlock';
 import { portfolioData } from '../data/content';
 import profilePic from '../assets/profile.png';
 import '../styles/animations.css';
+import { useTheme } from '../ThemeContext';
 
 const Home: React.FC = () => {
     const { home } = portfolioData;
 
-    // Track accent color from CSS variable
-    const [accentColor, setAccentColor] = useState('#f9db6d');
-    const [isDarkMode, setIsDarkMode] = useState(true);
-
-    useEffect(() => {
-        // Update accent color when CSS variable changes
-        const updateAccentColor = () => {
-            const color = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
-            if (color) setAccentColor(color);
-        };
-
-        // Update dark mode when CSS variable changes
-        const updateDarkMode = () => {
-            const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim();
-            setIsDarkMode(bgColor === '#0c0c0c' || bgColor === 'rgb(12, 12, 12)');
-        };
-
-        // Initial update
-        updateAccentColor();
-        updateDarkMode();
-
-        // Watch for changes (poll every 100ms)
-        const interval = setInterval(() => {
-            updateAccentColor();
-            updateDarkMode();
-        }, 100);
-
-        return () => clearInterval(interval);
-    }, []);
+    const { accentColor, isDarkMode } = useTheme();
 
     return (
         <div style={{ position: 'relative', minHeight: '100vh' }}>
@@ -117,13 +90,11 @@ const Home: React.FC = () => {
                                 ))}
                             </div>
                             {/* Profile Picture */}
-                            <div style={{
+                            <div className="art-deco-border" style={{
                                 width: '200px',
                                 height: '200px',
-                                borderRadius: '24px',
-                                overflow: 'hidden', // Ensure image respects border radius
+                                overflow: 'hidden',
                                 flexShrink: 0,
-                                border: '4px solid var(--accent-color)',
                                 boxShadow: '0 0 30px rgba(252, 225, 129, 0.2)'
                             }}>
                                 <img
@@ -167,7 +138,7 @@ const Home: React.FC = () => {
                                     style={{
                                         background: 'var(--card-bg)',
                                         padding: '2rem',
-                                        borderRadius: '16px',
+                                        borderRadius: '0',
                                         border: '1px solid rgba(255,255,255,0.05)',
                                         transition: 'transform 0.3s ease, border-color 0.3s ease',
                                         cursor: 'pointer',
@@ -191,7 +162,7 @@ const Home: React.FC = () => {
                                         height: '200px',
                                         background: 'rgba(0,0,0,0.2)',
                                         border: '1px dashed var(--secondary-text)',
-                                        borderRadius: '8px',
+                                        borderRadius: '0',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
@@ -202,9 +173,9 @@ const Home: React.FC = () => {
                                     </div>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                                         <h4 style={{ fontSize: '1.4rem', color: 'var(--text-color)', margin: 0 }}>{project.title}</h4>
-                                        {(project as any).description && (
+                                        {project.description && (
                                             <p style={{ fontSize: '1rem', color: 'var(--secondary-text)', margin: 0, lineHeight: 1.5 }}>
-                                                {(project as any).description}
+                                                {project.description}
                                             </p>
                                         )}
                                     </div>

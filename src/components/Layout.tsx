@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTheme } from '../ThemeContext';
+import { portfolioData } from '../data/content';
 import '../styles/index.css';
 
 interface LayoutProps {
@@ -12,8 +14,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     const [scrolled, setScrolled] = useState(false);
     const [mouseNearTop, setMouseNearTop] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
-    const [accentColor, setAccentColor] = useState('#f9db6d');
-    const [isDarkMode, setIsDarkMode] = useState(true);
+    const [projectsMenuOpen, setProjectsMenuOpen] = useState(false);
+    const { accentColor, setAccentColor, isDarkMode, setIsDarkMode } = useTheme();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -35,48 +37,31 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        // Update CSS custom property when accent color changes
-        document.documentElement.style.setProperty('--accent-color', accentColor);
-    }, [accentColor]);
-
-    useEffect(() => {
-        // Update CSS variables when theme changes
-        if (isDarkMode) {
-            document.documentElement.style.setProperty('--bg-color', '#0c0c0c');
-            document.documentElement.style.setProperty('--text-color', '#f0f0f0');
-            document.documentElement.style.setProperty('--secondary-text', '#a0a0a0');
-            document.documentElement.style.setProperty('--card-bg', '#1a1a1a');
-        } else {
-            document.documentElement.style.setProperty('--bg-color', '#ffffff');
-            document.documentElement.style.setProperty('--text-color', '#1a1a1a');
-            document.documentElement.style.setProperty('--secondary-text', '#404040'); // Darker for better accessibility
-            document.documentElement.style.setProperty('--card-bg', '#fcfcfc');
-        }
-    }, [isDarkMode]);
-
-    useEffect(() => {
         // Close menu when clicking outside
         const handleClickOutside = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
             if (menuOpen && !target.closest('[data-menu-container]')) {
                 setMenuOpen(false);
             }
+            if (projectsMenuOpen && !target.closest('[data-projects-container]')) {
+                setProjectsMenuOpen(false);
+            }
         };
 
-        if (menuOpen) {
+        if (menuOpen || projectsMenuOpen) {
             document.addEventListener('click', handleClickOutside);
         }
 
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-    }, [menuOpen]);
+    }, [menuOpen, projectsMenuOpen]);
 
     const pillStyle = {
         position: 'fixed' as const,
         top: '1.5rem',
         zIndex: 100,
-        background: 'rgba(20, 20, 20, 0.4)',
+        background: 'var(--card-bg)',
         backdropFilter: 'blur(16px) saturate(180%)',
         WebkitBackdropFilter: 'blur(16px) saturate(180%)',
         borderRadius: '100px',
@@ -84,8 +69,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         padding: '0.8rem 1.5rem',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
-        opacity: (scrolled && !mouseNearTop && !menuOpen) ? 0 : 1,
-        pointerEvents: (scrolled && !mouseNearTop && !menuOpen) ? 'none' as const : 'auto' as const
+        opacity: (scrolled && !mouseNearTop && !menuOpen && !projectsMenuOpen) ? 0 : 1,
+        pointerEvents: (scrolled && !mouseNearTop && !menuOpen && !projectsMenuOpen) ? 'none' as const : 'auto' as const
     };
 
     return (
@@ -127,7 +112,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                             top: 'auto',
                             left: '-0.8rem', // Shift left to align with pill padding
                             marginTop: '1.2rem', // Reduced gap for a more attached feel
-                            background: 'rgba(20, 20, 20, 0.4)', // Match pill bg
+                            background: 'var(--card-bg)', // Match pill bg
                             backdropFilter: 'blur(16px) saturate(180%)',
                             WebkitBackdropFilter: 'blur(16px) saturate(180%)',
                             borderRadius: '24px', // Slightly larger radius
@@ -247,20 +232,81 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     }}>
                         Home
                     </Link>
-                    <a href="#projects" style={{
-                        fontSize: '0.85rem',
-                        fontWeight: 500,
-                        opacity: 0.6,
-                        transition: 'opacity 0.2s ease',
-                        color: '#fff'
-                    }} onClick={(e) => {
-                        if (isHome) {
-                            e.preventDefault();
-                            document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }}>
-                        Projects
-                    </a>
+
+                    <div style={{ position: 'relative' }} data-projects-container>
+                        <button
+                            onClick={() => setProjectsMenuOpen(!projectsMenuOpen)}
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                fontSize: '0.85rem',
+                                fontWeight: 500,
+                                cursor: 'pointer',
+                                opacity: projectsMenuOpen ? 1 : 0.6,
+                                transition: 'opacity 0.2s ease',
+                                color: '#fff',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem'
+                            }}
+                        >
+                            Projects {projectsMenuOpen ? '▲' : '▼'}
+                        </button>
+
+                        {/* Projects Dropdown Menu */}
+                        {projectsMenuOpen && (
+                            <div style={{
+                                position: 'absolute',
+                                top: 'auto',
+                                right: '-0.8rem',
+                                marginTop: '1.2rem',
+                                background: 'var(--card-bg)',
+                                backdropFilter: 'blur(16px) saturate(180%)',
+                                WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                                borderRadius: '24px',
+                                border: '1px solid rgba(255, 255, 255, 0.08)',
+                                padding: '1.2rem',
+                                minWidth: '220px',
+                                boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+                                zIndex: 1000,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '0.5rem'
+                            }}>
+                                {portfolioData.projects.map(project => (
+                                    <Link
+                                        key={project.id}
+                                        to={project.path}
+                                        onClick={() => setProjectsMenuOpen(false)}
+                                        style={{
+                                            color: '#fff',
+                                            padding: '0.8rem',
+                                            borderRadius: '12px',
+                                            textDecoration: 'none',
+                                            fontSize: '0.85rem',
+                                            fontWeight: 600,
+                                            background: 'rgba(255, 255, 255, 0.05)',
+                                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                                            transition: 'all 0.2s ease',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '0.5rem'
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                                            e.currentTarget.style.borderColor = 'var(--accent-color)';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                                            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                                        }}
+                                    >
+                                        <span style={{ fontSize: '1.1rem' }}>{project.icon}</span> {project.title}
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </nav>
             <main>

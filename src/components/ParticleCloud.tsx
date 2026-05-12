@@ -95,8 +95,8 @@ const ParticleCloud: React.FC<ParticleCloudProps> = ({ accentColor, isDarkMode }
                 const jitter = (Math.random() - 0.5) * 40;
 
                 // Calculate the "home" position using the Spirograph formula
-                let x = (width / 2) + ((R - r) * Math.cos(t) + d * Math.cos(((R - r) / r) * t)) + jitter;
-                let y = (height / 2) + ((R - r) * Math.sin(t) - d * Math.sin(((R - r) / r) * t)) + jitter;
+                const x = (width / 2) + ((R - r) * Math.cos(t) + d * Math.cos(((R - r) / r) * t)) + jitter;
+                const y = (height / 2) + ((R - r) * Math.sin(t) - d * Math.sin(((R - r) / r) * t)) + jitter;
 
                 // Pick a random color from our list
                 const randomBase = palettes[Math.floor(Math.random() * palettes.length)];
@@ -225,8 +225,19 @@ const ParticleCloud: React.FC<ParticleCloudProps> = ({ accentColor, isDarkMode }
                 zIndex: 0, // Stay in the background
                 pointerEvents: 'none', // Allow clicking through the dots to buttons below
                 background: isDarkMode
-                    ? 'radial-gradient(circle at center, #1a1a1a 0%, #0c0c0c 100%)'
-                    : 'radial-gradient(circle at center, #ffffff 0%, #f0f0f0 100%)'
+                    ? `
+                        radial-gradient(circle at center, transparent 0%, #0c0c0c 100%),
+                        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                        #1a1a1a
+                    `
+                    : `
+                        radial-gradient(circle at center, transparent 0%, #f0f0f0 100%),
+                        linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                        #ffffff
+                    `,
+                backgroundSize: '100% 100%, 30px 30px, 30px 30px, 100% 100%'
             }}
         />
     );

@@ -4,7 +4,8 @@
   --accent-color: #f9db6d;
   --secondary-text: #a0a0a0;
   --card-bg: #1a1a1a;
-  --font-main: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+  --font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Playfair Display', serif;
 
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
@@ -55,8 +56,18 @@ h1,
 h2,
 h3,
 h4 {
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-weight: 700;
   line-height: 1.2;
+  letter-spacing: 0.05em;
+}
+
+.art-deco-border {
+  border: 2px solid var(--accent-color);
+  padding: 2px;
+  position: relative;
+  outline: 1px solid var(--accent-color);
+  outline-offset: -6px;
 }
 
 p {
