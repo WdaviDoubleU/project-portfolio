@@ -1,5 +1,15 @@
-import dp2Implant from '../assets/dp2_implant_1778553836616.png';
-import dp2Cad from '../assets/dp2_cad_1778553981932.png';
+import dp2Header from '../assets/dp2_header.png';
+import dp2FinalPrototype from '../assets/dp2_final_prototype.png';
+import dp2InitialIdeas from '../assets/dp2_initial_ideas.png';
+import dp2ScrewSketches from '../assets/dp2_screw_sketches.png';
+import dp2FinalCad from '../assets/dp2_final_cad.png';
+import dp2CadIterations from '../assets/dp2_cad_iteration_all.png';
+import dp1BoardAllIdeas from '../assets/dp1_board_all_ideas.png';
+import dp1BoardIdeas12 from '../assets/dp1_board_ideas12.png';
+import dp1CadClipRing from '../assets/dp1_cad_clip_ring.png';
+import dp1CadTwistRing from '../assets/dp1_cad_twist_ring.png';
+import dp1Poster from '../assets/dp1_poster.png';
+import dp1FinalPrototype from '../assets/dp1_final_prototype.png';
 
 export type CalloutColor = 'green' | 'brown' | 'blue' | 'purple' | 'red';
 
@@ -76,6 +86,20 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
         icon: "🔫",
         path: "/projects/dp4",
         description: "Earring application gun"
+      },
+      {
+        id: "medimonitor",
+        title: "MediMonitor: Smart Pill Dispenser",
+        icon: "🩺",
+        path: "/projects/medimonitor",
+        description: "IoT-enabled medication management system"
+      },
+      {
+        id: "fan-of-exercise",
+        title: "Fan of Exercise: Muscular Dystrophy Therapy",
+        icon: "🪭",
+        path: "/projects/fan-of-exercise",
+        description: "Custom exercise machine for neuromuscular rehabilitation"
       }
     ]
   },
@@ -121,8 +145,8 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               type: 'image',
               width: 'half',
               image: {
-                src: "https://via.placeholder.com/600x400/222/aaa?text=Ostomy+Appliance",
-                alt: "Ostomy Appliance Image"
+                src: dp1FinalPrototype,
+                alt: "Final prototype of modified ostomy appliance showing twist ring and pH indicator"
               }
             }
           ]
@@ -171,8 +195,8 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "<strong>Physical reinforcement</strong><ul style='margin-top:0.2rem; margin-bottom:0'><li>twist or rigid ring hinge lock</li><li>elastic or tape seal</li><li>magnetic seal</li></ul>"
               ],
               image: {
-                src: "https://via.placeholder.com/400x300/222/aaa?text=Hand+Sketches",
-                alt: "Sketches",
+                src: dp1BoardAllIdeas,
+                alt: "Whiteboard brainstorm session with all ideas",
                 position: 'right'
               }
             },
@@ -188,8 +212,8 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "We narrowed down to a few major ideas:<ul style='margin-top:0.2rem; margin-bottom:0'><li>An <strong>outer ring</strong> around the inside one</li><li>A clip style connection</li><li>A twist cap style connection</li><li>A <strong>visual indicator</strong> of lock integrity<ul style='margin-top:0.2rem; margin-bottom:0'><li>plastic tabs to pop up when secure</li><li>pH indicator around the connection ring</li></ul></li></ul>"
               ],
               image: {
-                src: "https://via.placeholder.com/400x300/222/aaa?text=Whiteboard",
-                alt: "Whiteboard",
+                src: dp1BoardIdeas12,
+                alt: "Whiteboard showing Idea 1 (visual cue for leaks) and Idea 2 (extra ring with snap clip)",
                 position: 'right'
               }
             },
@@ -204,8 +228,8 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "ultimately we did not end up making a feasible prototype for this"
               ],
               image: {
-                src: "https://via.placeholder.com/400x200/222/aaa?text=CAD+Rings",
-                alt: "CAD Rings",
+                src: dp1CadClipRing,
+                alt: "CAD model of the clip ring prototype",
                 position: 'right'
               }
             },
@@ -230,8 +254,8 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "We decided to switch to a <strong>twist ring</strong>, like a bottle cap. I <strong>began to make</strong> the CAD model, modifying my original design and learning how to use coil. We also decided the <strong>pH strip</strong> circle as a better indicator."
               ],
               image: {
-                src: "https://via.placeholder.com/400x200/222/aaa?text=Toothed+Rings",
-                alt: "Toothed Rings",
+                src: dp1CadTwistRing,
+                alt: "CAD model of the toothed twist ring design",
                 position: 'right'
               }
             },
@@ -250,8 +274,8 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "pH paper ring to show leakage, quick check for leakage, providing mental reassurance, easily replaceable as a sticker"
               ],
               image: {
-                src: "https://via.placeholder.com/400x300/222/aaa?text=Twist+N+Tell+Poster",
-                alt: "Poster",
+                src: dp1Poster,
+                alt: "Twist N' Tell® marketing poster — leakproof, arthritis-friendly ostomy appliance with screw mechanism and pH leakage indicator",
                 position: 'right'
               }
             }
@@ -304,6 +328,7 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
       path: "/projects/hip-implant",
       title: "Design Project 2: Designing a Hip Implant",
       icon: "🦴",
+      headerImage: dp2Header,
       sections: [
         {
           title: "Overview",
@@ -361,8 +386,8 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
               type: 'image',
               width: 'third',
               image: {
-                src: dp2Implant,
-                alt: "3D Printed Hip Implants"
+                src: dp2FinalPrototype,
+                alt: "Final 3D Printed Hip Implant prototypes (75% and 100% scale)"
               }
             }
           ]
@@ -391,8 +416,8 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "<strong>Liners:</strong> place liners on the head and socket without removing bone"
               ],
               image: {
-                src: "https://via.placeholder.com/300x400/222/aaa?text=Bone+Sketches",
-                alt: "Sketches",
+                src: dp2ScrewSketches,
+                alt: "Initial sketches of full replacement screw design and joint liners",
                 position: 'right'
               }
             },
@@ -409,8 +434,8 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "the joint lining idea would wear and not fix bone complications<ul style='margin-top:0.2rem; margin-bottom:0'><li>(also not allowed in project constraints)</li></ul>"
               ],
               image: {
-                src: "https://via.placeholder.com/300x400/222/aaa?text=Lined+Notes",
-                alt: "Notes",
+                src: dp2InitialIdeas,
+                alt: "Whiteboard brainstorm of hip implant ideas including materials and mechanical concepts",
                 position: 'right'
               }
             },
@@ -428,8 +453,8 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "2. My second prototype had a a straighter stem that now <strong>fit</strong> the patient’s <strong>femur</strong>. But it still may not handle the <strong>stresses</strong> well, we eventually decided the curve would be so small it shouldn’t be needed."
               ],
               image: {
-                src: "https://via.placeholder.com/300x400/222/aaa?text=CAD+Renders",
-                alt: "CAD Renders",
+                src: dp2CadIterations,
+                alt: "CAD iterations of the femoral stem showing progression from curved to straight geometry and refined details",
                 position: 'right'
               }
             },
@@ -446,8 +471,8 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "Four pegs on the acetabular cup grip into the pelvis for a secure hold."
               ],
               image: {
-                src: dp2Cad,
-                alt: "CAD render of hip stem",
+                src: dp2FinalCad,
+                alt: "Final CAD render of hip stem assembly",
                 position: 'right'
               }
             },
@@ -898,6 +923,111 @@ export const portfolioData: { home: HomeData, projects: Project[] } = {
                 "<strong>Scope:</strong>",
                 "While deciding on our initial idea, we had trouble deciding between <strong>multiple</strong> good ideas to determine which one fit best into the time frame we had. We got a better idea of how <strong>complex</strong> of a project we were able to complete in a <strong>certain amount of time</strong>."
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: "medimonitor",
+      path: "/projects/medimonitor",
+      title: "MediMonitor: Smart Pill Dispenser",
+      icon: "🩺",
+      sections: [
+        {
+          title: "Overview",
+          cards: [
+            {
+              type: 'text',
+              title: "Problem Statement",
+              icon: "❓",
+              color: "red",
+              width: "half",
+              content: [
+                "Medication non-adherence is a critical issue for patients with complex regimens, leading to poor health outcomes and increased hospitalizations."
+              ]
+            },
+            {
+              type: 'text',
+              title: "Technical Stack",
+              icon: "💻",
+              color: "blue",
+              width: "half",
+              listItems: [
+                "Arduino/ESP32 Microcontrollers",
+                "Load Cells for Weight Sensing",
+                "WiFi Connectivity",
+                "Mobile Notification System"
+              ]
+            }
+          ]
+        },
+        {
+          title: "Design Philosophy",
+          cards: [
+            {
+              type: 'text',
+              title: "User Experience",
+              icon: "🎨",
+              color: "purple",
+              width: "full",
+              content: [
+                "The interface was designed to be <strong>accessible</strong> for elderly users, featuring large text, high-contrast visual cues, and intuitive physical feedback."
+              ],
+              image: {
+                src: "https://via.placeholder.com/600x300/222/aaa?text=MediMonitor+Interface",
+                alt: "UI Mockup",
+                position: 'bottom'
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: "fan-of-exercise",
+      path: "/projects/fan-of-exercise",
+      title: "Fan of Exercise: Muscular Dystrophy Therapy",
+      icon: "🪭",
+      sections: [
+        {
+          title: "The Challenge",
+          cards: [
+            {
+              type: 'text',
+              title: "Patient Needs",
+              icon: "👤",
+              color: "brown",
+              width: "full",
+              content: [
+                "Patients with Muscular Dystrophy require <strong>consistent, low-impact exercise</strong> to maintain muscle tone without causing fatigue or injury."
+              ]
+            }
+          ]
+        },
+        {
+          title: "The Solution",
+          cards: [
+            {
+              type: 'text',
+              title: "Mechanical Design",
+              icon: "⚙️",
+              color: "green",
+              width: "two-thirds",
+              listItems: [
+                "Variable resistance fan mechanism",
+                "Adjustable ergonomic handles",
+                "Lightweight, portable frame",
+                "Force-sensing data logging"
+              ]
+            },
+            {
+              type: 'image',
+              width: 'third',
+              image: {
+                src: "https://via.placeholder.com/300x400/222/aaa?text=Exercise+Machine+CAD",
+                alt: "CAD model of Fan of Exercise"
+              }
             }
           ]
         }

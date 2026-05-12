@@ -11,6 +11,8 @@ interface Point {
     originalY: number; // The "home" position where the dot wants to return to
     color: string;     // The base color (e.g., "rgba(255, 255, 255, ")
     interactRadius: number; // Unique interaction radius for this particle
+    phase: number;     // Random phase offset so dots pulse out of sync
+    pulseSpeed: number; // Individual pulse speed so the rhythm feels organic
 }
 
 interface ParticleCloudProps {
@@ -111,7 +113,9 @@ const ParticleCloud: React.FC<ParticleCloudProps> = ({ accentColor, isDarkMode }
                     originalX: x,
                     originalY: y,
                     color: randomBase,
-                    interactRadius: 30 + Math.random() * 100 // Varied radius for each particle
+                    interactRadius: 30 + Math.random() * 100, // Varied radius for each particle
+                    phase: Math.random() * Math.PI * 2,        // Random start phase (0 – 2π)
+                    pulseSpeed: 0.001 + Math.random() * 0.003  // Each dot pulses at its own tempo
                 });
             }
         };
@@ -144,12 +148,13 @@ const ParticleCloud: React.FC<ParticleCloudProps> = ({ accentColor, isDarkMode }
             ctx.fillRect(0, 0, width, height);
             ctx.restore();
 
-            // GLOBAL PULSE FACTOR
-            // Oscillates between 0.8 and 1.2 over time
-            const time = Date.now() * 0.002;
-            const pulse = 1 + Math.sin(time) * 0.2;
+            // Each particle has its own phase & speed — advance them individually
 
             particles.forEach(p => {
+                // PER-PARTICLE PULSE — unique phase so dots breathe out of sync
+                p.phase += p.pulseSpeed;
+                const pulse = 1 + Math.sin(p.phase) * 0.2;
+
                 // 1. MOUSE INTERACTION
                 const dx = mouseRef.current.x - p.x;
                 const dy = mouseRef.current.y - p.y;
@@ -181,7 +186,7 @@ const ParticleCloud: React.FC<ParticleCloudProps> = ({ accentColor, isDarkMode }
 
                 // 4. DRAWING
                 ctx.beginPath();
-                // Apply pulse to size
+                // Apply per-particle pulse to size
                 ctx.arc(p.x, p.y, p.size * pulse, 0, Math.PI * 2);
 
                 // Make dots far from the mouse slightly stealthier
